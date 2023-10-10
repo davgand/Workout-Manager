@@ -4,7 +4,6 @@
 
 import 'package:adaptive_navigation/adaptive_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:gym_manager/src/screens/day_details_screen.dart';
 import 'package:gym_manager/src/screens/workout.dart';
 import 'package:gym_manager/src/screens/settings.dart';
 
@@ -26,15 +25,15 @@ class WorkoutScaffold extends StatelessWidget {
         selectedIndex: selectedIndex,
         body: const WorkoutScaffoldBody(),
         onDestinationSelected: (idx) {
-          if (idx == 0) routeState.go('/home');
-          if (idx == 1) routeState.go('/workout');
-          if (idx == 2) routeState.go('/settings');
+          //if (idx == 0) routeState.go('/home');
+          if (idx == 0) routeState.go('/workout');
+          if (idx == 1) routeState.go('/settings');
         },
         destinations: const [
-          AdaptiveScaffoldDestination(
-            title: 'Home',
-            icon: Icons.home_filled,
-          ),
+          // AdaptiveScaffoldDestination(
+          //   title: 'Home',
+          //   icon: Icons.home_filled,
+          // ),
           AdaptiveScaffoldDestination(
             title: 'Workout',
             icon: Icons.sports_gymnastics,
@@ -49,9 +48,9 @@ class WorkoutScaffold extends StatelessWidget {
   }
 
   int _getSelectedIndex(String pathTemplate) {
-    if (pathTemplate.startsWith('/home')) return 0;
-    if (pathTemplate == '/workout') return 1;
-    if (pathTemplate == '/settings') return 2;
+    // if (pathTemplate.startsWith('/home')) return 0;
+    if (pathTemplate == '/workout') return 0;
+    if (pathTemplate == '/settings') return 1;
     return 0;
   }
 }

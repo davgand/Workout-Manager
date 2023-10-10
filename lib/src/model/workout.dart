@@ -15,16 +15,16 @@ class WorkoutModel {
     required String description,
     List<Exercise>? exercises,
   }) {
-    var day = Day(days.length, description);
+    var day = Day(days.length.toString(), description);
     day.exercises = exercises ?? [];
     days.add(day);
     //notifyListeners();
   }
 
-  Day getDayById(int id) {
-    var result = Day(id, days[id].description);
-    return result;
-  }
+  //Day getDayById(String id) {
+  // var result = Day(id, days[id].description);
+  // return result;
+  //}
 
   void remove(Day day) {
     days.remove(day);

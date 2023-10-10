@@ -26,7 +26,7 @@ class ExerciseList extends StatelessWidget {
             ),
             Column(
               children: [
-                Text(exercises[index].rep.toString()),
+                Text(exercises[index].reps.toString()),
               ],
             ),
             Column(

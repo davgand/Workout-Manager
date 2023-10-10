@@ -1,7 +1,10 @@
+import "package:json_annotation/json_annotation.dart";
+
 import 'exercise.dart';
 
+@JsonSerializable()
 class Day {
-  final int id;
+  final String id;
   String description;
   List<Exercise> exercises = <Exercise>[];
 
@@ -18,7 +21,7 @@ class Day {
 
   Exercise getExerciseById(int id) {
     var result = Exercise(
-        id, exercises[id].name, exercises[id].rep, exercises[id].weight);
+        id, exercises[id].name, exercises[id].reps, exercises[id].weight);
     return result;
   }
 }

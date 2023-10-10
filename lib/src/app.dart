@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_manager/src/auth.dart';
-import 'package:provider/provider.dart';
 
-import 'model/workout.dart';
 import 'router/delegate.dart';
 import 'router/parsed_route.dart';
 import 'router/parser.dart';
@@ -34,7 +32,6 @@ class _WorkoutManagerState extends State<WorkoutManagerApp> {
         '/exercise/new',
         '/day/new',
         '/day/:dayId',
-        '/author/:authorId',
       ],
       guard: _guard,
       initialRoute: '/signin',
@@ -89,9 +86,9 @@ class _WorkoutManagerState extends State<WorkoutManagerApp> {
     if (!signedIn && from != signInRoute) {
       return signInRoute;
     }
-    // Go to /books if the user is signed in and tries to go to /signin.
+    // Go to /workout if the user is signed in and tries to go to /signin.
     else if (signedIn && from == signInRoute) {
-      return ParsedRoute('/books/popular', '/books/popular', {}, {});
+      return ParsedRoute('/workout', '/workout', {}, {});
     }
     return from;
   }
