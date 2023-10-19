@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:gym_manager/provider/fileHandler.dart';
 import 'package:window_size/window_size.dart';
 
 import 'src/app.dart';

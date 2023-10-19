@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gym_manager/src/model/exercise.dart';
+import 'package:gym_manager/src/widgets/exercise_item.dart';
 
 class ExerciseList extends StatelessWidget {
   final List<Exercise> exercises;
@@ -16,28 +17,13 @@ class ExerciseList extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => ListView.builder(
-      itemCount: exercises.length,
-      itemBuilder: (context, index) => Row(children: [
-            Column(
-              children: [
-                Text(exercises[index].name),
-              ],
-            ),
-            Column(
-              children: [
-                Text(exercises[index].reps.toString()),
-              ],
-            ),
-            Column(
-              children: [
-                Text(exercises[index].weight.toString()),
-              ],
-            ),
-            Column(
-              children: [
-                Text(exercises[index].notes),
-              ],
-            ),
-          ]));
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        itemCount: exercises.length,
+        itemBuilder: (context, index) => Row(children: [
+              ExerciseItem(
+                exercise: exercises[index],
+              )
+            ]));
+  }
 }

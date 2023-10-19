@@ -2,7 +2,7 @@
     <application
         android:label="gym_manager"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/gym_manager_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"

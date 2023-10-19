@@ -20,7 +20,8 @@ class DayDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(day.description),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             Expanded(

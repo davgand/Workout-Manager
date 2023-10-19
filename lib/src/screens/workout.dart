@@ -4,13 +4,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:gym_manager/src/model/workout.dart';
-import 'package:gym_manager/src/router/route_state.dart';
 import 'package:gym_manager/src/widgets/days_list.dart';
 
 class WorkoutScreen extends StatelessWidget {
   final String title = 'Workout';
+  final WorkoutModel workout;
 
-  const WorkoutScreen({super.key});
+  const WorkoutScreen({super.key, required this.workout});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -18,10 +18,7 @@ class WorkoutScreen extends StatelessWidget {
           title: Text(title),
         ),
         body: DaysList(
-          days: workoutInstance.days,
-          onTap: (day) {
-            RouteStateScope.of(context).go('/day/${day.id}');
-          },
+          days: workout.days,
         ),
       );
 }

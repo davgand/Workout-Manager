@@ -3,9 +3,6 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:gym_manager/src/auth.dart';
-import 'package:gym_manager/src/router/route_state.dart';
-import 'package:url_launcher/link.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -50,23 +47,8 @@ class SettingsContent extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             ElevatedButton(
-              onPressed: () {
-                WorkoutAuthScope.of(context).signOut();
-              },
+              onPressed: () {},
               child: const Text('Sign out'),
-            ),
-            Link(
-              uri: Uri.parse('/book/0'),
-              builder: (context, followLink) => TextButton(
-                onPressed: followLink,
-                child: const Text('Go directly to /book/0 (Link)'),
-              ),
-            ),
-            TextButton(
-              child: const Text('Go directly to /book/0 (RouteState)'),
-              onPressed: () {
-                RouteStateScope.of(context).go('/book/0');
-              },
             ),
           ].map((w) => Padding(padding: const EdgeInsets.all(8), child: w)),
           TextButton(
