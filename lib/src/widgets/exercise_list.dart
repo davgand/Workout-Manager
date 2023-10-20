@@ -20,10 +20,8 @@ class ExerciseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: exercises.length,
-        itemBuilder: (context, index) => Row(children: [
-              ExerciseItem(
-                exercise: exercises[index],
-              )
-            ]));
+        itemBuilder: (context, index) => ExerciseItem(
+              exercise: exercises[index],
+            ));
   }
 }

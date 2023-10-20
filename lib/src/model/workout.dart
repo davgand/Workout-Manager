@@ -19,7 +19,8 @@ class WorkoutModel extends ChangeNotifier {
     );
   }
 
-  Map<String, dynamic> toJson() => {'days': days};
+  Map<String, dynamic> toJson() =>
+      {'days': days.map((day) => day.toJson()).toList()};
 
 // Adds a workout day to the list
   void addDay({

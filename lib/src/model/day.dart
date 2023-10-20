@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'exercise.dart';
@@ -23,6 +22,15 @@ class Day extends ChangeNotifier {
           : <Exercise>[],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'description': description,
+      'exercises': exercises.map((exercise) => exercise.toJson()).toList(),
+    };
+  }
+
   void addExercise({
     required String name,
     required int reps,
@@ -31,6 +39,13 @@ class Day extends ChangeNotifier {
     var exercise =
         Exercise(id: exercises.length, name: name, reps: reps, weight: weight);
     exercises.add(exercise);
+    notifyListeners();
+  }
+
+  void editExercise(int id, String name, int reps, int weight) {
+    exercises[id].name = name;
+    exercises[id].reps = reps;
+    exercises[id].weight = weight;
     notifyListeners();
   }
 

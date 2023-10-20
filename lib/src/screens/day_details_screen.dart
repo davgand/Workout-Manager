@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:gym_manager/src/model/day.dart';
 import 'package:gym_manager/src/widgets/exercise_list.dart';
 
-class DayDetailsScreen extends StatelessWidget {
-  final Day day;
+import '../constants/app_styles.dart';
+import '../model/exercise.dart';
+import 'exercise_edit_popup.dart';
 
-  const DayDetailsScreen({
+class DayDetailsScreen extends StatelessWidget {
+  Day day;
+
+  DayDetailsScreen({
     super.key,
     required this.day,
   });
@@ -17,21 +21,32 @@ class DayDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          displayExerciseDialog(context);
+        },
+        shape: AppStyles.floatButtonShape,
+        child: const Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text(day.description),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Expanded(
-              child: ExerciseList(
-                exercises: day.exercises,
-              ),
-            ),
-          ],
-        ),
+      body: ExerciseList(
+        exercises: day.exercises,
       ),
     );
+  }
+
+  final _textFieldController = TextEditingController();
+
+  Future<void> displayExerciseDialog(BuildContext context,
+      [Exercise? exercise]) async {
+    String title = exercise == null ? "Add new Exercise" : "Edit Exercise";
+
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return ExerciseDialog();
+        });
   }
 }
