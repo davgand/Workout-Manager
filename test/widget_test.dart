@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gym_manager/src/app.dart';
+import 'package:workout_manager/src/app.dart';
 
 
 void main() {

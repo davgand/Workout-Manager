@@ -3,14 +3,14 @@ class Exercise {
   String name;
   int reps;
   int weight;
-  String? notes;
+  String notes;
 
   Exercise(
       {required this.id,
       required this.name,
       required this.reps,
       required this.weight,
-      this.notes});
+      this.notes = ""});
 
   factory Exercise.fromJson(Map<String, dynamic> json) => Exercise(
         id: json['id'],

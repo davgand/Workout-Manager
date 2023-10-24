@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:gym_manager/src/model/workout.dart';
+import 'package:workout_manager/src/model/workout.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../src/constants/constants.dart';
@@ -38,7 +38,7 @@ class FileHandler {
   }
 
   static void createWorkoutJson(File file) {
-    WorkoutModel model = WorkoutModel(days: AppConstants.dummyDays);
+    WorkoutModel model = WorkoutModel(AppConstants.dummyDays);
     final jsonModel = model.toJson();
     final jsonModelString = jsonEncode(jsonModel);
     file.writeAsString(jsonModelString);

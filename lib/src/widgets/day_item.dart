@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_manager/src/model/day.dart';
+import 'package:workout_manager/src/model/day.dart';
 
 class DayItem extends StatelessWidget {
   final Day day;

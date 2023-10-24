@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:gym_manager/provider/fileHandler.dart';
 import 'package:window_size/window_size.dart';
 
 import 'src/app.dart';
@@ -12,8 +11,8 @@ void main() {
   runApp(const WorkoutManagerApp());
 }
 
-const double windowWidth = 480;
-const double windowHeight = 854;
+const double windowWidth = 400;
+const double windowHeight = 800;
 
 void setupWindow() {
   if (!kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS)) {

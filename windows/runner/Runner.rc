@@ -92,9 +92,9 @@ BEGIN
             VALUE "CompanyName", "Dagas Studios" "\0"
             VALUE "FileDescription", "Gym manager" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "gym_manager" "\0"
+            VALUE "InternalName", "workout_manager" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 Dagas Studios. All rights reserved." "\0"
-            VALUE "OriginalFilename", "gym_manager.exe" "\0"
+            VALUE "OriginalFilename", "workout_manager.exe" "\0"
             VALUE "ProductName", "Gym Manager" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END

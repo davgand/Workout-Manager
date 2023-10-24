@@ -1,4 +1,4 @@
-package com.gym_manager
+package com.workout_manager
 
 import io.flutter.embedding.android.FlutterActivity
 

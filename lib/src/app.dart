@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gym_manager/provider/fileHandler.dart';
-import 'package:gym_manager/src/model/workout.dart';
-import 'package:gym_manager/src/screens/workout.dart';
+import 'package:provider/provider.dart';
+import 'package:workout_manager/provider/fileHandler.dart';
+import 'package:workout_manager/src/model/workout.dart';
+import 'package:workout_manager/src/screens/workout.dart';
 
 class WorkoutManagerApp extends StatefulWidget {
   const WorkoutManagerApp({super.key});
@@ -12,7 +13,7 @@ class WorkoutManagerApp extends StatefulWidget {
 
 class _WorkoutManagerState extends State<WorkoutManagerApp> {
   late final title = 'Workout Manager';
-  WorkoutModel workout = WorkoutModel(days: []);
+  WorkoutModel workout = WorkoutModel([]);
 
   @override
   void initState() {
@@ -29,6 +30,9 @@ class _WorkoutManagerState extends State<WorkoutManagerApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: title, home: WorkoutScreen(workout: workout));
+    return ChangeNotifierProvider(
+        create: (context) => WorkoutModel(workout.days),
+        child:
+            MaterialApp(title: title, home: WorkoutScreen(workout: workout)));
   }
 }

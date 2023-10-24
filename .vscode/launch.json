@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "gym_manager",
+      "name": "workout_manager",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "gym_manager (profile mode)",
+      "name": "workout_manager (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "gym_manager (release mode)",
+      "name": "workout_manager (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"

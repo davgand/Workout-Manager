@@ -1,4 +1,4 @@
-# gym_manager
+# Workout manager
 
 A new Flutter project.
 

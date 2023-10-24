@@ -3,16 +3,20 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:gym_manager/src/model/exercise.dart';
-import 'package:gym_manager/src/widgets/exercise_item.dart';
+import 'package:workout_manager/src/model/day.dart';
+import 'package:workout_manager/src/model/exercise.dart';
+import 'package:workout_manager/src/widgets/exercise_item.dart';
+import 'package:provider/provider.dart';
 
 class ExerciseList extends StatelessWidget {
   final List<Exercise> exercises;
   final ValueChanged<Exercise>? onTap;
+  final bool listEditing;
 
   const ExerciseList({
     required this.exercises,
     this.onTap,
+    required this.listEditing,
     super.key,
   });
 
@@ -20,8 +24,10 @@ class ExerciseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: exercises.length,
-        itemBuilder: (context, index) => ExerciseItem(
+        itemBuilder: (context, index) => Consumer<Day>(
+            builder: (context, day, child) => ExerciseItem(
               exercise: exercises[index],
-            ));
+                  listEditing: listEditing,
+                )));
   }
 }

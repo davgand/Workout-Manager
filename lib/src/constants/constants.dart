@@ -1,5 +1,5 @@
-import 'package:gym_manager/src/model/day.dart';
-import 'package:gym_manager/src/model/exercise.dart';
+import 'package:workout_manager/src/model/day.dart';
+import 'package:workout_manager/src/model/exercise.dart';
 
 class AppConstants {
   static const fileName = "workout.json";

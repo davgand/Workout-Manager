@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="gym_manager"
+        android:label="Workout Manager"
         android:name="${applicationName}"
-        android:icon="@mipmap/gym_manager_logo">
+        android:icon="@mipmap/workout_manager_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"
