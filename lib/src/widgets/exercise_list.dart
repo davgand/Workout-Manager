@@ -26,7 +26,7 @@ class ExerciseList extends StatelessWidget {
         itemCount: exercises.length,
         itemBuilder: (context, index) => Consumer<Day>(
             builder: (context, day, child) => ExerciseItem(
-              exercise: exercises[index],
+                  exercise: exercises[index],
                   listEditing: listEditing,
                 )));
   }

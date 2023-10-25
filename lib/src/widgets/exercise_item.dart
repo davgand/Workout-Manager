@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
+import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 
 import 'exercise_popup.dart';
@@ -39,7 +41,8 @@ class ExerciseItem extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {
-                          editExercise(context, exercise);
+                          var day = context.read<Day>();
+                          editExercise(context, day, exercise);
                         },
                         icon: Icon(Icons.edit))
                   ],
@@ -58,13 +61,13 @@ class ExerciseItem extends StatelessWidget {
     ));
   }
 
-  Future<void> editExercise(BuildContext context, Exercise exercise) {
+  Future<void> editExercise(BuildContext context, Day day, Exercise exercise) {
     print(exercise.name);
 
     return showDialog(
         context: context,
         builder: (context) {
-          return ExerciseDialog(exercise);
+          return ExerciseDialog(day, exercise);
         });
   }
 

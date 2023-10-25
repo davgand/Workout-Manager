@@ -26,7 +26,7 @@ class Exercise {
       'name': name,
       'reps': reps,
       'weight': weight,
-      if (notes != null) 'notes': notes else 'notes': "",
+      'notes': notes,
     };
   }
 }

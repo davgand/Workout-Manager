@@ -40,7 +40,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          displayExerciseDialog(context);
+          displayExerciseDialog(context, day);
         },
         shape: AppStyles.floatButtonShape,
         child: const Icon(Icons.add),
@@ -58,7 +58,7 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
       body: ChangeNotifierProvider(
         create: (context) => Day(
             id: day.id, description: day.description, exercises: day.exercises),
-        child: ExerciseList(
+        builder: (context, child) => ExerciseList(
         exercises: day.exercises,
           listEditing: editing,
         ),
@@ -72,11 +72,11 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
     });
   }
 
-  Future<void> displayExerciseDialog(BuildContext context) async {
+  Future<void> displayExerciseDialog(BuildContext context, Day day) async {
     return showDialog(
         context: context,
         builder: (context) {
-          return ExerciseDialog();
+          return ExerciseDialog(day);
         });
   }
 }

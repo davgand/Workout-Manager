@@ -35,17 +35,24 @@ class Day extends ChangeNotifier {
     required String name,
     required int reps,
     required int weight,
+    String notes = "",
   }) {
-    var exercise =
-        Exercise(id: exercises.length, name: name, reps: reps, weight: weight);
+    var exercise = Exercise(
+        id: exercises.length,
+        name: name,
+        reps: reps,
+        weight: weight,
+        notes: notes);
     exercises.add(exercise);
     notifyListeners();
   }
 
-  void editExercise(int id, String name, int reps, int weight) {
+  void editExercise(int id, String name, int reps, int weight,
+      [String notes = ""]) {
     exercises[id].name = name;
     exercises[id].reps = reps;
     exercises[id].weight = weight;
+    exercises[id].notes = notes;
     notifyListeners();
   }
 
@@ -59,7 +66,8 @@ class Day extends ChangeNotifier {
         id: id,
         name: exercises[id].name,
         reps: exercises[id].reps,
-        weight: exercises[id].weight);
+        weight: exercises[id].weight,
+        notes: exercises[id].notes);
     return result;
   }
 }

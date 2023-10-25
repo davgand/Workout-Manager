@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
+import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 
 class ExerciseDialog extends StatefulWidget {
   final Exercise? exercise;
+  final Day day;
 
-  ExerciseDialog([this.exercise]);
+  ExerciseDialog(this.day, [this.exercise]);
 
   @override
   State<ExerciseDialog> createState() => _ExerciseDialogState();
@@ -17,17 +20,22 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
   TextEditingController weightController = TextEditingController();
   TextEditingController notesController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  Exercise? exercise;
+  Day day = Day(id: 0, description: "", exercises: []);
+  bool isNew = true;
 
   @override
   initState() {
+    day = widget.day;
     if (widget.exercise != null) {
-      descriptionController = TextEditingController()
-        ..text = widget.exercise!.name;
+      isNew = false;
+      exercise = widget.exercise;
+      descriptionController = TextEditingController()..text = exercise!.name;
       repsController = TextEditingController()
-        ..text = widget.exercise!.reps.toString();
+        ..text = exercise!.reps.toString();
       weightController = TextEditingController()
-        ..text = widget.exercise!.weight.toString();
-      notesController = TextEditingController()..text = widget.exercise!.notes;
+        ..text = exercise!.weight.toString();
+      notesController = TextEditingController()..text = exercise!.notes;
     }
     super.initState();
   }
@@ -79,6 +87,9 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                             padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                             child: TextFormField(
                               keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               decoration: InputDecoration(
                                   labelText: "Reps", hintText: "Enter Reps"),
                               controller: repsController,
@@ -89,6 +100,9 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                         Expanded(
                           child: TextFormField(
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
                             decoration: InputDecoration(
                                 labelText: "Weight", hintText: "Enter Weight"),
                             controller: weightController,
@@ -116,7 +130,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ElevatedButton(
-                            onPressed: () => {saveExercise()},
+                            onPressed: () => {saveExercise(context)},
                             style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Palette.blue),
@@ -158,9 +172,22 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
     return null;
   }
 
-  void saveExercise() {
+  void saveExercise(BuildContext context) {
     if (_formKey.currentState!.validate()) {
-      print("OK");
+      // var day = Provider.of<Day>(context, listen: false);
+      // var day = context.read<Day>();
+      String description = descriptionController.text;
+      int reps = int.parse(repsController.text);
+      int weight = int.parse(weightController.text);
+      String notes = notesController.text;
+
+      if (isNew) {
+        day.addExercise(
+            name: description, reps: reps, weight: weight, notes: notes);
+      } else {
+        day.editExercise(exercise!.id, description, reps, weight, notes);
+      }
+      print(day.description);
     }
   }
 }
