@@ -6,14 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/widgets/exercise_item.dart';
-import 'package:provider/provider.dart';
 
 class ExerciseList extends StatelessWidget {
   final List<Exercise> exercises;
+  final Day day;
   final ValueChanged<Exercise>? onTap;
   final bool listEditing;
 
   const ExerciseList({
+    required this.day,
     required this.exercises,
     this.onTap,
     required this.listEditing,
@@ -24,10 +25,10 @@ class ExerciseList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: exercises.length,
-        itemBuilder: (context, index) => Consumer<Day>(
-            builder: (context, day, child) => ExerciseItem(
-                  exercise: exercises[index],
-                  listEditing: listEditing,
-                )));
+        itemBuilder: (context, index) => ExerciseItem(
+              day: day,
+              exercise: exercises[index],
+              listEditing: listEditing,
+            ));
   }
 }

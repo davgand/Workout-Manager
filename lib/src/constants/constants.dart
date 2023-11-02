@@ -5,7 +5,7 @@ class AppConstants {
   static const fileName = "workout.json";
 
   static List<Day> dummyDays = [
-    Day(id: 0, description: "Day 1", exercises: [
+    Day.create(id: 0, description: "Day 1", exercises: [
       Exercise(id: 0, name: "Exercise 1", reps: 20, weight: 2000)
     ])
   ];

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
+import 'package:workout_manager/src/model/workout.dart';
 
 class ExerciseDialog extends StatefulWidget {
   final Exercise? exercise;
@@ -21,7 +23,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
   TextEditingController notesController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Exercise? exercise;
-  Day day = Day(id: 0, description: "", exercises: []);
+  Day day = Day.create(id: 0, description: "", exercises: []);
   bool isNew = true;
 
   @override
@@ -42,8 +44,8 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
 
   @override
   Widget build(BuildContext context) {
-    String title =
-        widget.exercise == null ? "Add new Exercise" : "Edit Exercise";
+    //String title =
+    //  widget.exercise == null ? "Add new Exercise" : "Edit Exercise";
 
     return Dialog(
         shape: RoundedRectangleBorder(
@@ -73,6 +75,10 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                             decoration: InputDecoration(
                                 labelText: "Description",
                                 hintText: "Enter description"),
+                            textInputAction: TextInputAction.next,
+                            onChanged: (_) => FocusScope.of(context)
+                                .nextFocus(), // focus to next
+
                             controller: descriptionController,
                             validator: (value) => validateInput(value),
                           ),
@@ -92,6 +98,10 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                               ],
                               decoration: InputDecoration(
                                   labelText: "Reps", hintText: "Enter Reps"),
+                              textInputAction: TextInputAction.next,
+                              onChanged: (_) => FocusScope.of(context)
+                                  .nextFocus(), // focus to next
+
                               controller: repsController,
                               validator: (value) => validateInput(value),
                             ),
@@ -105,6 +115,10 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                             ],
                             decoration: InputDecoration(
                                 labelText: "Weight", hintText: "Enter Weight"),
+                            textInputAction: TextInputAction.next,
+                            onChanged: (_) => FocusScope.of(context)
+                                .nextFocus(), // focus to next
+
                             controller: weightController,
                             validator: (value) => validateInput(value),
                           ),
@@ -118,6 +132,10 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                             decoration: InputDecoration(
                                 labelText: "Notes", hintText: "Enter notes"),
                             controller: notesController,
+                            textInputAction: TextInputAction.next,
+                            onChanged: (_) => FocusScope.of(context)
+                                .unfocus(), // focus to next
+
                           ),
                         ),
                       ],
@@ -130,7 +148,9 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           ElevatedButton(
-                            onPressed: () => {saveExercise(context)},
+                            onPressed: () {
+                              saveExercise(context, day);
+                            },
                             style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Palette.blue),
@@ -172,7 +192,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
     return null;
   }
 
-  void saveExercise(BuildContext context) {
+  void saveExercise(BuildContext context, Day day) {
     if (_formKey.currentState!.validate()) {
       // var day = Provider.of<Day>(context, listen: false);
       // var day = context.read<Day>();
@@ -182,12 +202,17 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
       String notes = notesController.text;
 
       if (isNew) {
-        day.addExercise(
-            name: description, reps: reps, weight: weight, notes: notes);
+        context
+            .read<WorkoutModel>()
+            .addExercise(day, description, reps, weight, notes);
+        //day.addExercise(
+        //  name: description, reps: reps, weight: weight, notes: notes);
       } else {
-        day.editExercise(exercise!.id, description, reps, weight, notes);
+        context
+            .read<WorkoutModel>()
+            .editExercise(day, exercise!.id, description, reps, weight, notes);
       }
-      print(day.description);
+      Navigator.of(context).pop();
     }
   }
 }

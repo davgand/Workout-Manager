@@ -1,10 +1,7 @@
-// Copyright 2021, the Flutter project authors. Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/workout.dart';
+import 'package:workout_manager/src/widgets/day_popup.dart';
 import 'package:workout_manager/src/widgets/days_list.dart';
 
 class WorkoutScreen extends StatelessWidget {
@@ -13,11 +10,14 @@ class WorkoutScreen extends StatelessWidget {
 
   const WorkoutScreen({super.key, required this.workout});
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          displayDayDialog(context);
+        },
         shape: AppStyles.floatButtonShape,
         child: const Icon(Icons.add),
       ),
@@ -26,5 +26,13 @@ class WorkoutScreen extends StatelessWidget {
       ),
       body: DaysList(days: workout.days),
     );
+  }
+
+  Future<void> displayDayDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return DayDialog();
+        });
   }
 }

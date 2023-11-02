@@ -13,26 +13,21 @@ class WorkoutManagerApp extends StatefulWidget {
 
 class _WorkoutManagerState extends State<WorkoutManagerApp> {
   late final title = 'Workout Manager';
-  WorkoutModel workout = WorkoutModel([]);
 
   @override
   void initState() {
-    readWorkout();
     super.initState();
   }
 
-  void readWorkout() async {
-    WorkoutModel workout = await FileHandler.readWorkout();
-    setState(() {
-      this.workout = workout;
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => WorkoutModel(workout.days),
-        child:
-            MaterialApp(title: title, home: WorkoutScreen(workout: workout)));
+        create: (context) => WorkoutModel.create(),
+        child: Consumer<WorkoutModel>(builder: (_, workout, __) {
+          return MaterialApp(
+              title: title, home: WorkoutScreen(workout: workout));
+        }));
   }
 }

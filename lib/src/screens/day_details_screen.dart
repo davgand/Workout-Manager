@@ -2,15 +2,12 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/widgets/exercise_list.dart';
-import 'package:provider/provider.dart';
 
 import '../constants/app_styles.dart';
-import '../model/exercise.dart';
 import '../widgets/exercise_popup.dart';
 
 class DayDetailsScreen extends StatefulWidget {
@@ -26,7 +23,7 @@ class DayDetailsScreen extends StatefulWidget {
 }
 
 class _DayDetailsScreenState extends State<DayDetailsScreen> {
-  Day day = Day(id: 0, description: "", exercises: []);
+  Day day = Day.create(id: 0, description: "", exercises: []);
   bool editing = false;
 
   @override
@@ -55,13 +52,10 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
               icon: Icon(Icons.edit))
         ],
       ),
-      body: ChangeNotifierProvider(
-        create: (context) => Day(
-            id: day.id, description: day.description, exercises: day.exercises),
-        builder: (context, child) => ExerciseList(
+      body: ExerciseList(
+        day: day,
         exercises: day.exercises,
-          listEditing: editing,
-        ),
+        listEditing: editing,
       ),
     );
   }
