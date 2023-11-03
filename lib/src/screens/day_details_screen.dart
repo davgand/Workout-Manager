@@ -3,7 +3,6 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/widgets/exercise_list.dart';
 
@@ -24,7 +23,6 @@ class DayDetailsScreen extends StatefulWidget {
 
 class _DayDetailsScreenState extends State<DayDetailsScreen> {
   Day day = Day.create(id: 0, description: "", exercises: []);
-  bool editing = false;
 
   @override
   initState() {
@@ -44,26 +42,12 @@ class _DayDetailsScreenState extends State<DayDetailsScreen> {
       ),
       appBar: AppBar(
         title: Text(day.description),
-        actions: [
-          IconButton(
-              onPressed: () {
-                toggleDayEditMode();
-              },
-              icon: Icon(Icons.edit))
-        ],
       ),
       body: ExerciseList(
         day: day,
         exercises: day.exercises,
-        listEditing: editing,
       ),
     );
-  }
-
-  void toggleDayEditMode() {
-    setState(() {
-      editing = !editing;
-    });
   }
 
   Future<void> displayExerciseDialog(BuildContext context, Day day) async {

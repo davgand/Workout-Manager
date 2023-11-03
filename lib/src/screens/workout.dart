@@ -4,12 +4,17 @@ import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/widgets/day_popup.dart';
 import 'package:workout_manager/src/widgets/days_list.dart';
 
-class WorkoutScreen extends StatelessWidget {
-  final String title = 'Workout';
+class WorkoutScreen extends StatefulWidget {
   final WorkoutModel workout;
 
   const WorkoutScreen({super.key, required this.workout});
+  @override
+  State<WorkoutScreen> createState() => _WorkoutScreenState();
+}
 
+class _WorkoutScreenState extends State<WorkoutScreen> {
+  final String title = 'Workout Manager';
+  bool editing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +28,14 @@ class WorkoutScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         title: Text(title),
+        actions: [
+          IconButton(
+              onPressed: () => showHelpDialog(context), icon: Icon(Icons.help))
+        ],
       ),
-      body: DaysList(days: workout.days),
+      body: DaysList(
+        days: widget.workout.days,
+      ),
     );
   }
 
@@ -33,6 +44,26 @@ class WorkoutScreen extends StatelessWidget {
         context: context,
         builder: (context) {
           return DayDialog();
+        });
+  }
+
+  Future<void> showHelpDialog(BuildContext context) async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Help"),
+            content: Text("Swipe right to see the options for each list item."),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Ok'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
         });
   }
 }

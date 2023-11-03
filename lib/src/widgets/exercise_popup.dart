@@ -76,9 +76,6 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                                 labelText: "Description",
                                 hintText: "Enter description"),
                             textInputAction: TextInputAction.next,
-                            onChanged: (_) => FocusScope.of(context)
-                                .nextFocus(), // focus to next
-
                             controller: descriptionController,
                             validator: (value) => validateInput(value),
                           ),
@@ -99,9 +96,6 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                               decoration: InputDecoration(
                                   labelText: "Reps", hintText: "Enter Reps"),
                               textInputAction: TextInputAction.next,
-                              onChanged: (_) => FocusScope.of(context)
-                                  .nextFocus(), // focus to next
-
                               controller: repsController,
                               validator: (value) => validateInput(value),
                             ),
@@ -116,9 +110,6 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                             decoration: InputDecoration(
                                 labelText: "Weight", hintText: "Enter Weight"),
                             textInputAction: TextInputAction.next,
-                            onChanged: (_) => FocusScope.of(context)
-                                .nextFocus(), // focus to next
-
                             controller: weightController,
                             validator: (value) => validateInput(value),
                           ),
@@ -132,10 +123,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                             decoration: InputDecoration(
                                 labelText: "Notes", hintText: "Enter notes"),
                             controller: notesController,
-                            textInputAction: TextInputAction.next,
-                            onChanged: (_) => FocusScope.of(context)
-                                .unfocus(), // focus to next
-
+                            textInputAction: TextInputAction.done,
                           ),
                         ),
                       ],

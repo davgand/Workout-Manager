@@ -5,6 +5,7 @@ import 'package:workout_manager/src/widgets/day_item.dart';
 class DaysList extends StatelessWidget {
   final List<Day> days;
 
+
   const DaysList({
     super.key,
     required this.days,
@@ -12,8 +13,17 @@ class DaysList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return ListView.builder(
+    return days.isEmpty
+        ? Center(
+            child: Text(
+              'There are no days,\nadd one pressing the + sign!',
+              textAlign: TextAlign.center,
+            ),
+          )
+        : ListView.builder(
           itemCount: days.length,
-        itemBuilder: (context, index) => DayItem(day: days[index]));
+            itemBuilder: (context, index) => DayItem(
+                  day: days[index],
+                ));
   }
 }

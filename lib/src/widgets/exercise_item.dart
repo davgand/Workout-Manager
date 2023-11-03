@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
@@ -9,18 +10,37 @@ import 'exercise_popup.dart';
 
 class ExerciseItem extends StatelessWidget {
   final Exercise exercise;
-  final bool listEditing;
   final Day day;
 
   const ExerciseItem(
       {super.key,
       required this.day,
-      required this.exercise,
-      required this.listEditing});
+    required this.exercise,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
+    return Slidable(
+        key: Key(day.id.toString()),
+        startActionPane: ActionPane(
+          motion: const DrawerMotion(),
+          //dismissible: DismissiblePane(onDismissed: () {}),
+          children: [
+            SlidableAction(
+              onPressed: (context) => editExercise(context, day, exercise),
+              backgroundColor: Palette.white,
+              foregroundColor: Palette.grey,
+              icon: Icons.edit,
+            ),
+            SlidableAction(
+              onPressed: (context) => deleteExercise(context, day, exercise),
+              backgroundColor: Palette.red,
+              foregroundColor: Palette.white,
+              icon: Icons.delete,
+            ),
+          ],
+        ),
+        child: ListTile(
         title: Row(
       children: [
         Expanded(
@@ -37,32 +57,9 @@ class ExerciseItem extends StatelessWidget {
             flex: 15,
             child: Column(children: [
               Text("${exercise.weight} kg"),
-            ])),
-        if (listEditing)
-          Flexible(
-              flex: 30,
-              child: Row(children: [
-                Column(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          editExercise(context, day, exercise);
-                        },
-                        icon: Icon(Icons.edit))
-                  ],
-                ),
-                Column(
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          deleteExercise(context, day, exercise);
-                        },
-                        icon: Icon(Icons.delete))
-                  ],
-                )
-              ]))
+                ])),
       ],
-    ));
+        )));
   }
 
   Future<void> editExercise(BuildContext context, Day day, Exercise exercise) {
@@ -86,7 +83,8 @@ class ExerciseItem extends StatelessWidget {
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text('Are you sure to delete ${exercise.name}?'),
+                  Text("Are you sure to delete"),
+                  Text("${exercise.name}?", style: AppStyles.boldStyle),
                 ],
               ),
             ),

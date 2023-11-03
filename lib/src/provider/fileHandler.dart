@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../src/constants/constants.dart';
+import '../constants/constants.dart';
 
 class FileHandler {
   static bool fileExists = false;

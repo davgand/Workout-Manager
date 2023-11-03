@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_manager/provider/fileHandler.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/screens/workout.dart';
 

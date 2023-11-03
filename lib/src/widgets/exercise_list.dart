@@ -11,13 +11,11 @@ class ExerciseList extends StatelessWidget {
   final List<Exercise> exercises;
   final Day day;
   final ValueChanged<Exercise>? onTap;
-  final bool listEditing;
 
   const ExerciseList({
     required this.day,
     required this.exercises,
     this.onTap,
-    required this.listEditing,
     super.key,
   });
 
@@ -28,7 +26,6 @@ class ExerciseList extends StatelessWidget {
         itemBuilder: (context, index) => ExerciseItem(
               day: day,
               exercise: exercises[index],
-              listEditing: listEditing,
             ));
   }
 }
