@@ -3,6 +3,7 @@ import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/widgets/day_popup.dart';
 import 'package:workout_manager/src/widgets/days_list.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WorkoutScreen extends StatefulWidget {
   final WorkoutModel workout;
@@ -53,8 +54,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Help"),
-            content: Text("Swipe right to see the options for each list item."),
+            title: Text(AppLocalizations.of(context)!.help_dialog_title),
+            content: Text(AppLocalizations.of(context)!.help_dialog_body),
             actions: <Widget>[
               TextButton(
                 child: const Text('Ok'),

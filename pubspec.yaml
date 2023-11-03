@@ -48,6 +48,9 @@ dependencies:
   path_provider: ^2.1.1
   flutter_slidable: ^1.0.0
   simple_animations: ^5.0.2
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -66,7 +69,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

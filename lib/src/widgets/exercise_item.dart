@@ -5,6 +5,7 @@ import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/model/workout.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'exercise_popup.dart';
 
@@ -79,25 +80,27 @@ class ExerciseItem extends StatelessWidget {
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text("Delete Exercise"),
+            title: Text(
+              AppLocalizations.of(context)!.delete_exercise_list_dialog_title,
+            ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text("Are you sure to delete"),
-                  Text("${exercise.name}?", style: AppStyles.boldStyle),
+                  Text(AppLocalizations.of(context)!
+                      .delete_exercise_list_dialog_body(exercise.name)),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('Yes'),
+                child: Text(AppLocalizations.of(context)!.yes),
                 onPressed: () {
                   context.read<WorkoutModel>().deleteExercise(day, exercise);
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: const Text('Cancel'),
+                child: Text(AppLocalizations.of(context)!.cancel),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

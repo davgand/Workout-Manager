@@ -1,0 +1,37 @@
+{
+  "@@locale": "it",
+  "yes": "Ok",
+  "no": "No",
+  "cancel": "Annulla",
+  "help_dialog_title": "Aiuto",
+  "help_dialog_body": "Scorri a destra su un elemento per visualizzare le diverse opzioni.",
+  "delete_exercise_list_dialog_title": "Elimina Esercizio",
+  "delete_exercise_list_dialog_body": "Vuoi davvero eliminare l'esercizio {list_name}? \n\nQuesta azione non può essere annullata.",
+  "@delete_exercise_list_dialog_body": {
+    "placeholders": {
+      "list_name": {
+        "type": "String",
+        "example": "Esercizio"
+      }
+    }
+  },
+  "delete_day_list_dialog_title": "Elimina Giorno",
+  "delete_day_list_dialog_body": "Vuoi davvero eliminare la giornata {list_name}? \n\nTutti gli esercizi associati saranno eliminati. \n\nQuesta azione non può essere annullata.",
+  "@delete_day_list_dialog_body": {
+    "placeholders": {
+      "list_name": {
+        "type": "String",
+        "example": "Giorno"
+      }
+    }
+  },
+  "pronoun": "{gender, select, male{lui} female{lei} other{loro}}",
+  "@pronoun": {
+    "description": "A gendered message",
+    "placeholders": {
+      "gender": {
+        "type": "String"
+      }
+    }
+  }
+}
