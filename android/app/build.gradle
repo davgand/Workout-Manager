@@ -52,19 +52,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-        }
-
-    applicationVariants.all { variant ->
-            variant.outputs.all { output ->
-                output.outputFileName = "workout-manager.apk"
-            }
-        }
-    }
-     signingConfigs {
+    signingConfigs {
         release {
             def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
             def allFilesFromDir = new File(tmpFilePath).listFiles()
@@ -78,6 +66,17 @@ android {
             storePassword System.getenv("KEYSTORE_PASSWORD")
             keyAlias System.getenv("ALIAS")
             keyPassword System.getenv("KEY_PASSWORD")
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+
+    applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                output.outputFileName = "workout-manager.apk"
+            }
         }
     }
 }
