@@ -54,13 +54,13 @@ android {
     }
     signingConfigs {
         release {
-            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
-            def allFilesFromDir = new File(tmpFilePath).listFiles()
+            // def tmpFilePath = System.getProperty("user.home") + "/work/keystore/"
+            // def allFilesFromDir = new File(tmpFilePath).listFiles()
 
-            if (allFilesFromDir != null) {
-                def keystoreFile = allFilesFromDir.first()
-                keystoreFile.renameTo("keystore/key.jks")
-            }
+            // if (allFilesFromDir != null) {
+            //     def keystoreFile = allFilesFromDir.first()
+            //     keystoreFile.renameTo("keystore/key.jks")
+            // }
 
             storeFile = file("keystore/key.jks")
             storePassword System.getenv("KEYSTORE_PASSWORD")
