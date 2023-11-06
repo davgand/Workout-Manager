@@ -63,7 +63,7 @@ jobs:
           channel: "stable"
           cache: true
       - name: Get dependencies
-        run: flutter pub get
+        run: flutter upgrade && flutter pub get
 
       - name: Start Release build
         run: flutter build appbundle
