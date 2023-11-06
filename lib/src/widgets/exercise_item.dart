@@ -81,26 +81,26 @@ class ExerciseItem extends StatelessWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalizations.of(context)!.delete_exercise_list_dialog_title,
+              AppLocalizations.of(context).delete_exercise_list_dialog_title,
             ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text(AppLocalizations.of(context)!
+                  Text(AppLocalizations.of(context)
                       .delete_exercise_list_dialog_body(exercise.name)),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: Text(AppLocalizations.of(context)!.yes),
+                child: Text(AppLocalizations.of(context).yes),
                 onPressed: () {
                   context.read<WorkoutModel>().deleteExercise(day, exercise);
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text(AppLocalizations.of(context)!.cancel),
+                child: Text(AppLocalizations.of(context).cancel),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

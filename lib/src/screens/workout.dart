@@ -54,8 +54,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context)!.help_dialog_title),
-            content: Text(AppLocalizations.of(context)!.help_dialog_body),
+            title: Text(AppLocalizations.of(context).help_dialog_title),
+            content: Text(AppLocalizations.of(context).help_dialog_body),
             actions: <Widget>[
               TextButton(
                 child: const Text('Ok'),

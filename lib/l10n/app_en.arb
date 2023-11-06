@@ -25,13 +25,6 @@
       }
     }
   },
-  "pronoun": "{gender, select, male{he} female{she} other{they}}",
-  "@pronoun": {
-    "description": "A gendered message",
-    "placeholders": {
-      "gender": {
-        "type": "String"
-      }
-    }
-  }
+  "no_days_in_list": "There are no days,\nadd one pressing the + sign!",
+  "no_exercises_in_list": "There are no exercises,\nadd one pressing the + sign!"
 }

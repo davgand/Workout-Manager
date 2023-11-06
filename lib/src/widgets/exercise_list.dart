@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/widgets/exercise_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class ExerciseList extends StatelessWidget {
   final List<Exercise> exercises;
@@ -21,7 +23,14 @@ class ExerciseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return exercises.isEmpty
+        ? Center(
+            child: Text(
+              AppLocalizations.of(context).no_exercises_in_list,
+              textAlign: TextAlign.center,
+            ),
+          )
+        : ListView.builder(
         itemCount: exercises.length,
         itemBuilder: (context, index) => ExerciseItem(
               day: day,

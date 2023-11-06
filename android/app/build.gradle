@@ -60,8 +60,13 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
-    }
 
+    applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                output.outputFileName = "workout-manager.apk"
+            }
+        }
+    }
      signingConfigs {
         release {
             def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
