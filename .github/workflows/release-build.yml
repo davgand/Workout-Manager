@@ -27,7 +27,7 @@ jobs:
 
   build:
     name: Create android build
-    needs: version
+    #needs: version
     runs-on: ubuntu-latest
     steps:
       # - name: Get version
