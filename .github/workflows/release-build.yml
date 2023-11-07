@@ -73,7 +73,7 @@ jobs:
           SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          run: flutter build appbundle
+        run: flutter build appbundle
 
       - name: Upload Android release
         uses: actions/upload-artifact@v2

@@ -25,6 +25,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+// Create a variable called keystorePropertiesFile, and initialize it to your
+// keystore.properties file, in the rootProject folder.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+// Initialize a new Properties() object called keystoreProperties.
+def keystoreProperties = new Properties()
+
+// Load your keystore.properties file into the keystoreProperties object.
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+
+
 android {
     namespace "com.workout_manager"
     compileSdkVersion flutter.compileSdkVersion
@@ -53,24 +65,27 @@ android {
         versionName flutterVersionName
     }
     signingConfigs {
-        release {
-            // def tmpFilePath = System.getProperty("user.home") + "/work/keystore/"
-            // def allFilesFromDir = new File(tmpFilePath).listFiles()
-
-            // if (allFilesFromDir != null) {
-            //     def keystoreFile = allFilesFromDir.first()
-            //     keystoreFile.renameTo("keystore/key.jks")
-            // }
-
+        releaseActions {
             storeFile = file("keystore/key.jks")
             storePassword System.getenv("KEYSTORE_PASSWORD")
             keyAlias System.getenv("ALIAS")
             keyPassword System.getenv("KEY_PASSWORD")
+
+        }
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
         }
     }
     buildTypes {
         release {
             signingConfig signingConfigs.release
+        }
+
+        releaseActions {
+            signingConfig signingConfigs.releaseActions
         }
 
     applicationVariants.all { variant ->
