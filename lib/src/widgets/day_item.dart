@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/workout.dart';
-import 'package:workout_manager/src/screens/day_details_screen.dart';
+import 'package:workout_manager/src/screens/day_details_page.dart';
 import 'package:workout_manager/src/widgets/day_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -51,7 +51,7 @@ class DayItem extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DayDetailsScreen(day: day),
+                builder: (context) => DayDetailsPage(day: day),
               ),
             );
           },

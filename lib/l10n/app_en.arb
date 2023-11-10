@@ -36,5 +36,10 @@
   "time": "Time",
   "weight": "Weight",
   "notes": "Notes",
-  "enter_value_message": "Please enter a value"
+  "enter_value_message": "Please enter a value",
+  "day": "{count, plural, one{Day} other{Days}}",
+  "exercise": "{count, plural, one{Exercise} other{Exercises}}",
+  "workout": "{count, plural, one{Workout} other{Workouts}}",
+  "warmup": "Warmup",
+  "cardio": "Cardio"
 }

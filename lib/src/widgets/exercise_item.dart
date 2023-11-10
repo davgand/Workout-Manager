@@ -61,9 +61,13 @@ class ExerciseItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           if (exercise.reps == AppConstants.emptyValue)
-                            Text("${exercise.series}")
+                            Text(
+                                style: AppStyles.dataStyle,
+                                "${exercise.series}")
                           else
-                            Text("${exercise.series} x ${exercise.reps}"),
+                            Text(
+                                style: AppStyles.dataStyle,
+                                "${exercise.series} x ${exercise.reps}"),
                         ])),
                 if (exercise.weight != AppConstants.emptyValue)
                   Expanded(
@@ -71,7 +75,9 @@ class ExerciseItem extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("${exercise.weight} kg"),
+                            Text(
+                                style: AppStyles.dataStyle,
+                                "${exercise.weight} kg"),
                           ])),
                 if (exercise.time != AppConstants.emptyValue)
                   Expanded(
@@ -79,12 +85,16 @@ class ExerciseItem extends StatelessWidget {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text("${exercise.time} s"),
+                            Text(
+                                style: AppStyles.dataStyle,
+                                "${exercise.time} s"),
                           ])),
               ],
             ),
             onTap: () {
-              showNotes(context, exercise);
+              if (exercise.notes.isNotEmpty) {
+                showNotes(context, exercise);
+              }
             }));
   }
 

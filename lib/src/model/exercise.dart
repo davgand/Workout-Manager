@@ -1,3 +1,5 @@
+import 'package:workout_manager/src/constants/constants.dart';
+
 class Exercise {
   int id;
   String name;
@@ -10,10 +12,10 @@ class Exercise {
   Exercise(
       {required this.id,
       required this.name,
-      this.reps = 0,
+      this.reps = AppConstants.emptyValue,
       required this.series,
-      this.time = 0,
-      this.weight = 0,
+      this.time = AppConstants.emptyValue,
+      this.weight = AppConstants.emptyValue,
       this.notes = ""});
 
   factory Exercise.fromJson(Map<String, dynamic> json) => Exercise(

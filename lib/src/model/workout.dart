@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:workout_manager/src/provider/fileHandler.dart';
 import 'package:workout_manager/src/model/exercise.dart';
@@ -88,12 +89,14 @@ class WorkoutModel extends ChangeNotifier {
 
   void editExercise(Day day, int id, String name, int series,
       [int reps = 0, int time = 0, int weight = 0, String notes = ""]) {
-    days[day.id].exercises[id].name = name;
-    days[day.id].exercises[id].reps = reps;
-    days[day.id].exercises[id].series = series;
-    days[day.id].exercises[id].time = series;
-    days[day.id].exercises[id].weight = weight;
-    days[day.id].exercises[id].notes = notes;
+    var index =
+        days[day.id].exercises.indexWhere((exercise) => exercise.id == id);
+    days[day.id].exercises[index].name = name;
+    days[day.id].exercises[index].reps = reps;
+    days[day.id].exercises[index].series = series;
+    days[day.id].exercises[index].time = series;
+    days[day.id].exercises[index].weight = weight;
+    days[day.id].exercises[index].notes = notes;
 
     FileHandler.writeWorkout(WorkoutModel(days));
     notifyListeners();
