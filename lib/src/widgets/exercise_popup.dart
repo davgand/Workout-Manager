@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
+import 'package:workout_manager/src/constants/constants.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/model/workout.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExerciseDialog extends StatefulWidget {
   final Exercise? exercise;
@@ -19,6 +21,8 @@ class ExerciseDialog extends StatefulWidget {
 class _ExerciseDialogState extends State<ExerciseDialog> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController repsController = TextEditingController();
+  TextEditingController seriesController = TextEditingController();
+  TextEditingController timeController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController notesController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -34,9 +38,21 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
       exercise = widget.exercise;
       descriptionController = TextEditingController()..text = exercise!.name;
       repsController = TextEditingController()
-        ..text = exercise!.reps.toString();
+        ..text = exercise!.reps == AppConstants.emptyValue
+            ? ""
+            : exercise!.reps.toString();
+      seriesController = TextEditingController()
+        ..text = exercise!.series == AppConstants.emptyValue
+            ? ""
+            : exercise!.series.toString();
+      timeController = TextEditingController()
+        ..text = exercise!.time == AppConstants.emptyValue
+            ? ""
+            : exercise!.time.toString();
       weightController = TextEditingController()
-        ..text = exercise!.weight.toString();
+        ..text = exercise!.weight == AppConstants.emptyValue
+            ? ""
+            : exercise!.weight.toString();
       notesController = TextEditingController()..text = exercise!.notes;
     }
     super.initState();
@@ -59,13 +75,13 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
             borderRadius: BorderRadius.all(const Radius.circular(10)),
             color: Colors.white,
           ),
-          width: 350,
-          height: 350,
+          //width: 380,
+          height: 400,
           padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
           child: Form(
             key: _formKey,
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(children: [
                     Row(
@@ -73,8 +89,9 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                         Expanded(
                           child: TextFormField(
                             decoration: InputDecoration(
-                                labelText: "Description",
-                                hintText: "Enter description"),
+                              labelText:
+                                  AppLocalizations.of(context).description,
+                            ),
                             textInputAction: TextInputAction.next,
                             controller: descriptionController,
                             validator: (value) => validateInput(value),
@@ -84,9 +101,9 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Padding(
+                        children: [
+                          Expanded(
+                              child: Padding(
                             padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
                             child: TextFormField(
                               keyboardType: TextInputType.number,
@@ -94,13 +111,42 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                                 FilteringTextInputFormatter.digitsOnly
                               ],
                               decoration: InputDecoration(
-                                  labelText: "Reps", hintText: "Enter Reps"),
+                                  labelText:
+                                      AppLocalizations.of(context).series),
                               textInputAction: TextInputAction.next,
-                              controller: repsController,
+                              controller: seriesController,
                               validator: (value) => validateInput(value),
                             ),
+                          )),
+                          Expanded(
+                            child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context).reps),
+                              textInputAction: TextInputAction.next,
+                              controller: repsController,
+                            ),
                           ),
-                        ),
+                        ]),
+                    Row(
+                      children: [
+                        Expanded(
+                            child: Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          child: TextFormField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            decoration: InputDecoration(
+                                labelText: AppLocalizations.of(context).weight),
+                            textInputAction: TextInputAction.next,
+                            controller: weightController,
+                          ),
+                        )),
                         Expanded(
                           child: TextFormField(
                             keyboardType: TextInputType.number,
@@ -108,10 +154,9 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: InputDecoration(
-                                labelText: "Weight", hintText: "Enter Weight"),
+                                labelText: AppLocalizations.of(context).time),
                             textInputAction: TextInputAction.next,
-                            controller: weightController,
-                            validator: (value) => validateInput(value),
+                            controller: timeController,
                           ),
                         ),
                       ],
@@ -121,7 +166,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                         Expanded(
                           child: TextFormField(
                             decoration: InputDecoration(
-                                labelText: "Notes", hintText: "Enter notes"),
+                                labelText: AppLocalizations.of(context).notes),
                             controller: notesController,
                             textInputAction: TextInputAction.done,
                           ),
@@ -131,7 +176,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                   ]),
                   Spacer(),
                   Padding(
-                      padding: EdgeInsets.only(bottom: 20),
+                      padding: EdgeInsets.only(bottom: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -143,7 +188,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                               backgroundColor:
                                   MaterialStateProperty.all(Palette.blue),
                             ),
-                            child: const Text("Ok"),
+                            child: Text(AppLocalizations.of(context).ok),
                           ),
                           ElevatedButton(
                             onPressed: () => {Navigator.of(context).pop()},
@@ -151,8 +196,8 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                               backgroundColor:
                                   MaterialStateProperty.all(Palette.white),
                             ),
-                            child: const Text(
-                              "Cancel",
+                            child: Text(
+                              AppLocalizations.of(context).cancel,
                               style: TextStyle(color: Palette.blue),
                             ),
                           ),
@@ -168,6 +213,8 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
     // Clean up the controllers when the widget is disposed.
     descriptionController.dispose();
     repsController.dispose();
+    seriesController.dispose();
+    timeController.dispose();
     weightController.dispose();
     notesController.dispose();
     super.dispose();
@@ -175,30 +222,31 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
 
   String? validateInput(String? value) {
     if (value == null || value.isEmpty) {
-      return "Please enter a value";
+      return AppLocalizations.of(context).enter_value_message;
     }
     return null;
   }
 
   void saveExercise(BuildContext context, Day day) {
     if (_formKey.currentState!.validate()) {
-      // var day = Provider.of<Day>(context, listen: false);
-      // var day = context.read<Day>();
       String description = descriptionController.text;
-      int reps = int.parse(repsController.text);
-      int weight = int.parse(weightController.text);
+      int reps = int.tryParse(repsController.text) ?? AppConstants.emptyValue;
+      int series =
+          int.tryParse(seriesController.text) ?? AppConstants.emptyValue;
+      int time = int.tryParse(timeController.text) ?? AppConstants.emptyValue;
+      int weight =
+          int.tryParse(weightController.text) ?? AppConstants.emptyValue;
       String notes = notesController.text;
 
       if (isNew) {
         context
             .read<WorkoutModel>()
-            .addExercise(day, description, reps, weight, notes);
-        //day.addExercise(
-        //  name: description, reps: reps, weight: weight, notes: notes);
+            .addExercise(day, description, series, reps, time, weight, notes);
       } else {
         context
             .read<WorkoutModel>()
-            .editExercise(day, exercise!.id, description, reps, weight, notes);
+            .editExercise(
+            day, exercise!.id, description, series, reps, time, weight, notes);
       }
       Navigator.of(context).pop();
     }

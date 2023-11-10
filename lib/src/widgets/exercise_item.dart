@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
+import 'package:workout_manager/src/constants/constants.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/model/workout.dart';
@@ -13,9 +14,9 @@ class ExerciseItem extends StatelessWidget {
   final Exercise exercise;
   final Day day;
 
-  const ExerciseItem(
-      {super.key,
-      required this.day,
+  const ExerciseItem({
+    super.key,
+    required this.day,
     required this.exercise,
   });
 
@@ -25,7 +26,6 @@ class ExerciseItem extends StatelessWidget {
         key: Key(day.id.toString()),
         startActionPane: ActionPane(
           motion: const DrawerMotion(),
-          //dismissible: DismissiblePane(onDismissed: () {}),
           children: [
             SlidableAction(
               onPressed: (context) => editExercise(context, day, exercise),
@@ -42,30 +42,72 @@ class ExerciseItem extends StatelessWidget {
           ],
         ),
         child: ListTile(
-        title: Row(
-      children: [
-        Expanded(
-            flex: 30,
-            child: Column(children: [
-              Text(style: AppStyles.exerciseTitleStyle, exercise.name)
-            ])),
-        Expanded(
-            flex: 15,
-            child: Column(children: [
-              Text(exercise.reps.toString()),
-            ])),
-        Expanded(
-            flex: 15,
-            child: Column(children: [
-              Text("${exercise.weight} kg"),
-                ])),
-      ],
-        )));
+            title: Row(
+              children: [
+                Expanded(
+                    flex: 30,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            style: AppStyles.exerciseTitleStyle,
+                            exercise.name,
+                            textAlign: TextAlign.start,
+                          )
+                        ])),
+                Expanded(
+                    flex: 15,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          if (exercise.reps == AppConstants.emptyValue)
+                            Text("${exercise.series}")
+                          else
+                            Text("${exercise.series} x ${exercise.reps}"),
+                        ])),
+                if (exercise.weight != AppConstants.emptyValue)
+                  Expanded(
+                      flex: 15,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text("${exercise.weight} kg"),
+                          ])),
+                if (exercise.time != AppConstants.emptyValue)
+                  Expanded(
+                      flex: 15,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text("${exercise.time} s"),
+                          ])),
+              ],
+            ),
+            onTap: () {
+              showNotes(context, exercise);
+            }));
+  }
+
+  Future<void> showNotes(BuildContext context, Exercise exercise) {
+    return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(AppLocalizations.of(context).notes),
+            content: Text(exercise.notes),
+            actions: <Widget>[
+              TextButton(
+                child: Text(AppLocalizations.of(context).ok),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 
   Future<void> editExercise(BuildContext context, Day day, Exercise exercise) {
-    print(exercise.name);
-
     return showDialog(
         context: context,
         builder: (context) {

@@ -1,10 +1,13 @@
 {
   "@@locale": "it",
-  "yes": "Ok",
+  "ok": "Ok",
+  "yes": "Si",
   "no": "No",
   "cancel": "Annulla",
   "help_dialog_title": "Aiuto",
   "help_dialog_body": "Scorri a destra su un elemento per visualizzare le diverse opzioni.",
+  "help_dialog_info": "Workout Manager è un progetto open source.",
+  "help_dialog_credits": "Sviluppato con ❤️ da Davide Gandolfi.",
   "delete_exercise_list_dialog_title": "Elimina Esercizio",
   "delete_exercise_list_dialog_body": "Vuoi davvero eliminare l'esercizio {list_name}? \n\nQuesta azione non può essere annullata.",
   "@delete_exercise_list_dialog_body": {
@@ -26,5 +29,12 @@
     }
   },
   "no_days_in_list": "Non sono presenti giornate,\naggiungine una premendo il pulsante +!",
-  "no_exercises_in_list": "Non sono presenti esercisi,\naggiungine uno premendo il pulsante +!"
+  "no_exercises_in_list": "Non sono presenti esercisi,\naggiungine uno premendo il pulsante +!",
+  "description": "Descrizione",
+  "reps": "Ripetizioni",
+  "series": "Serie",
+  "time": "Tempo",
+  "weight": "Peso",
+  "notes": "Note",
+  "enter_value_message": "Please enter a value"
 }

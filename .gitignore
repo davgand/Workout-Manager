@@ -48,3 +48,4 @@ app.*.map.json
 
 # Ignore Gradle build output directory
 build
+TODO.md

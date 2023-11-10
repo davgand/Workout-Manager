@@ -70,12 +70,14 @@ class WorkoutModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addExercise(Day day, String name, int reps, int weight,
-      [String notes = ""]) {
+  void addExercise(Day day, String name, int series,
+      [int reps = 0, int time = 0, int weight = 0, String notes = ""]) {
     var exercise = Exercise(
         id: days[day.id].exercises.length,
         name: name,
         reps: reps,
+        series: series,
+        time: time,
         weight: weight,
         notes: notes);
     days[day.id].exercises.add(exercise);
@@ -84,10 +86,12 @@ class WorkoutModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void editExercise(Day day, int id, String name, int reps, int weight,
-      [String notes = ""]) {
+  void editExercise(Day day, int id, String name, int series,
+      [int reps = 0, int time = 0, int weight = 0, String notes = ""]) {
     days[day.id].exercises[id].name = name;
     days[day.id].exercises[id].reps = reps;
+    days[day.id].exercises[id].series = series;
+    days[day.id].exercises[id].time = series;
     days[day.id].exercises[id].weight = weight;
     days[day.id].exercises[id].notes = notes;
 
@@ -107,6 +111,8 @@ class WorkoutModel extends ChangeNotifier {
         id: id,
         name: days[day.id].exercises[id].name,
         reps: days[day.id].exercises[id].reps,
+        series: days[day.id].exercises[id].series,
+        time: days[day.id].exercises[id].time,
         weight: days[day.id].exercises[id].weight,
         notes: days[day.id].exercises[id].notes);
     return result;

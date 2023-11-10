@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/workout.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DayDialog extends StatefulWidget {
   final Day? day;
@@ -60,8 +61,9 @@ class _DayDialogState extends State<DayDialog> {
                         Expanded(
                           child: TextFormField(
                             decoration: InputDecoration(
-                                labelText: "Description",
-                                hintText: "Enter description"),
+                              labelText:
+                                  AppLocalizations.of(context).description,
+                            ),
                             controller: descriptionController,
                             validator: (value) => validateInput(value),
                           ),
@@ -83,7 +85,7 @@ class _DayDialogState extends State<DayDialog> {
                               backgroundColor:
                                   MaterialStateProperty.all(Palette.blue),
                             ),
-                            child: const Text("Ok"),
+                            child: Text(AppLocalizations.of(context).ok),
                           ),
                           ElevatedButton(
                             onPressed: () => {Navigator.of(context).pop()},
@@ -91,8 +93,8 @@ class _DayDialogState extends State<DayDialog> {
                               backgroundColor:
                                   MaterialStateProperty.all(Palette.white),
                             ),
-                            child: const Text(
-                              "Cancel",
+                            child: Text(
+                              AppLocalizations.of(context).cancel,
                               style: TextStyle(color: Palette.blue),
                             ),
                           ),
@@ -112,7 +114,7 @@ class _DayDialogState extends State<DayDialog> {
 
   String? validateInput(String? value) {
     if (value == null || value.isEmpty) {
-      return "Please enter a value";
+      return AppLocalizations.of(context).enter_value_message;
     }
     return null;
   }

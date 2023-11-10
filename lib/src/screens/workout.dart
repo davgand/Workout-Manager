@@ -51,14 +51,24 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   Future<void> showHelpDialog(BuildContext context) async {
     return showDialog<void>(
         context: context,
-        barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(AppLocalizations.of(context).help_dialog_title),
-            content: Text(AppLocalizations.of(context).help_dialog_body),
+            content: SingleChildScrollView(
+                child: ListBody(children: [
+              Text(AppLocalizations.of(context).help_dialog_body),
+              Text("\n"),
+              Text(AppLocalizations.of(context).help_dialog_info),
+              Text("\n"),
+              Text("\n"),
+              Text(
+                AppLocalizations.of(context).help_dialog_credits,
+                style: AppStyles.smallStyle,
+              ),
+            ])),
             actions: <Widget>[
               TextButton(
-                child: const Text('Ok'),
+                child: Text(AppLocalizations.of(context).ok),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

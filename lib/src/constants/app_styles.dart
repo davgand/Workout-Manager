@@ -6,6 +6,9 @@ class AppStyles {
   static const TextStyle exerciseTitleStyle = TextStyle(
      fontSize: 16, fontWeight: FontWeight.w500);
 
+  static const TextStyle smallStyle =
+      TextStyle(fontSize: 10, fontWeight: FontWeight.w300);
+
   static const TextStyle boldStyle =
       TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
 
