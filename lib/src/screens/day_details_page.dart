@@ -18,7 +18,7 @@ class DayDetailsPage extends StatefulWidget {
 }
 
 class _DayDetailsPageState extends State<DayDetailsPage> {
-  Day day = Day.create(id: 0, description: "", exercises: []);
+  Day day = Day.create(id: "", description: "", exercises: []);
 
   @override
   initState() {

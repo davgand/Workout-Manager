@@ -1,7 +1,7 @@
 import 'package:workout_manager/src/constants/constants.dart';
 
 class Warmup {
-  int id;
+  String id;
   int time;
   int reps;
   String description;

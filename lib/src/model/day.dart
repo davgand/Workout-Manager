@@ -3,12 +3,12 @@ import 'package:workout_manager/src/model/warmup.dart';
 import 'exercise.dart';
 
 class Day {
-  int id = 0;
-  String description = "";
-  List<Exercise> exercises = [];
-  List<Warmup> warmups = [];
+  String id;
+  String description;
+  List<Exercise> exercises;
+  List<Warmup> warmups;
 
-  Day();
+  // Day();
   Day.create(
       {required this.id,
       required this.description,

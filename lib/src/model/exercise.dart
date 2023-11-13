@@ -1,7 +1,7 @@
 import 'package:workout_manager/src/constants/constants.dart';
 
 class Exercise {
-  int id;
+  String id;
   String name;
   int reps;
   int series;

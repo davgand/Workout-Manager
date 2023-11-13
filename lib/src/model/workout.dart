@@ -1,7 +1,7 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:workout_manager/src/provider/fileHandler.dart';
+import 'package:uuid/uuid.dart';
 import 'package:workout_manager/src/model/exercise.dart';
+import 'package:workout_manager/src/provider/fileHandler.dart';
 
 import 'day.dart';
 
@@ -39,8 +39,10 @@ class WorkoutModel extends ChangeNotifier {
     required String description,
     List<Exercise>? exercises,
   }) {
+    var uuid = Uuid();
+
     var day = Day.create(
-        id: days.length, description: description, exercises: exercises ?? []);
+        id: uuid.v1(), description: description, exercises: exercises ?? []);
     days.add(day);
 
     FileHandler.writeWorkout(WorkoutModel(days));
@@ -49,22 +51,23 @@ class WorkoutModel extends ChangeNotifier {
   }
 
   void editDay({
-    required int id,
+    required Day day,
     required String description,
   }) {
-    days[id].description = description;
+    var dayId = days.indexOf(day);
+    days[dayId].description = description;
 
     FileHandler.writeWorkout(WorkoutModel(days));
 
     notifyListeners();
   }
 
-  Day getDayById(int id) {
-    return days.elementAt(id);
+  Day getDayById(String id) {
+    return days.where((day) => day.id == id).first;
   }
 
-  void deleteDay(Day day) {
-    days.removeAt(day.id);
+  void deleteDay(Day dayToDelete) {
+    days.removeWhere((day) => day.id == dayToDelete.id);
 
     FileHandler.writeWorkout(WorkoutModel(days));
 
@@ -73,51 +76,57 @@ class WorkoutModel extends ChangeNotifier {
 
   void addExercise(Day day, String name, int series,
       [int reps = 0, int time = 0, int weight = 0, String notes = ""]) {
+    var uuid = Uuid();
+
     var exercise = Exercise(
-        id: days[day.id].exercises.length,
+        id: uuid.v1(),
         name: name,
         reps: reps,
         series: series,
         time: time,
         weight: weight,
         notes: notes);
-    days[day.id].exercises.add(exercise);
+
+    days[days.indexOf(day)].exercises.add(exercise);
 
     FileHandler.writeWorkout(WorkoutModel(days));
     notifyListeners();
   }
 
-  void editExercise(Day day, int id, String name, int series,
+  void editExercise(Day day, Exercise exercise, String name, int series,
       [int reps = 0, int time = 0, int weight = 0, String notes = ""]) {
-    var index =
-        days[day.id].exercises.indexWhere((exercise) => exercise.id == id);
-    days[day.id].exercises[index].name = name;
-    days[day.id].exercises[index].reps = reps;
-    days[day.id].exercises[index].series = series;
-    days[day.id].exercises[index].time = series;
-    days[day.id].exercises[index].weight = weight;
-    days[day.id].exercises[index].notes = notes;
+    var dayIndex = days.indexOf(day);
+    var index = days[dayIndex].exercises.indexOf(exercise);
+    days[dayIndex].exercises[index].name = name;
+    days[dayIndex].exercises[index].reps = reps;
+    days[dayIndex].exercises[index].series = series;
+    days[dayIndex].exercises[index].time = series;
+    days[dayIndex].exercises[index].weight = weight;
+    days[dayIndex].exercises[index].notes = notes;
 
     FileHandler.writeWorkout(WorkoutModel(days));
     notifyListeners();
   }
 
   void deleteExercise(Day day, Exercise exercise) {
-    days[day.id].exercises.remove(exercise);
+    days[days.indexOf(day)].exercises.remove(exercise);
 
     FileHandler.writeWorkout(WorkoutModel(days));
     notifyListeners();
   }
 
-  Exercise getExerciseById(Day day, int id) {
+  Exercise getExerciseById(Day day, String id) {
+    var dayIndex = days.indexOf(day);
+    var exerciseIndex =
+        days[dayIndex].exercises.indexWhere((exercise) => exercise.id == id);
     var result = Exercise(
         id: id,
-        name: days[day.id].exercises[id].name,
-        reps: days[day.id].exercises[id].reps,
-        series: days[day.id].exercises[id].series,
-        time: days[day.id].exercises[id].time,
-        weight: days[day.id].exercises[id].weight,
-        notes: days[day.id].exercises[id].notes);
+        name: days[dayIndex].exercises[exerciseIndex].name,
+        reps: days[dayIndex].exercises[exerciseIndex].reps,
+        series: days[dayIndex].exercises[exerciseIndex].series,
+        time: days[dayIndex].exercises[exerciseIndex].time,
+        weight: days[dayIndex].exercises[exerciseIndex].weight,
+        notes: days[dayIndex].exercises[exerciseIndex].notes);
     return result;
   }
 }

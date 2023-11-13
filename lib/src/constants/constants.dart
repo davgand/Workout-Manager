@@ -7,8 +7,8 @@ class AppConstants {
   static const emptyValue = 0;
 
   static List<Day> dummyDays = [
-    Day.create(id: 0, description: "Day 1", exercises: [
-      Exercise(id: 0, name: "Exercise 1", series: 3, reps: 20, weight: 2000)
+    Day.create(id: "day1", description: "Day 1", exercises: [
+      Exercise(id: "ex1", name: "Exercise 1", series: 3, reps: 20, weight: 2000)
     ])
   ];
 }

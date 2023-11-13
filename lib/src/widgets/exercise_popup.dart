@@ -27,7 +27,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
   TextEditingController notesController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Exercise? exercise;
-  Day day = Day.create(id: 0, description: "", exercises: []);
+  Day day = Day.create(id: "", description: "", exercises: []);
   bool isNew = true;
 
   @override
@@ -246,7 +246,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
         context
             .read<WorkoutModel>()
             .editExercise(
-            day, exercise!.id, description, series, reps, time, weight, notes);
+            day, exercise!, description, series, reps, time, weight, notes);
       }
       Navigator.of(context).pop();
     }

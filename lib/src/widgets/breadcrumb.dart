@@ -12,13 +12,15 @@ class Breadcrumb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      Text(startPage),
+    return FittedBox(
+        fit: BoxFit.fitWidth,
+        child: Row(children: [
+          Text(startPage),
       Padding(
         padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
         child: Icon(Icons.arrow_right_alt_outlined),
       ),
       Text(endPage),
-    ]);
+        ]));
   }
 }

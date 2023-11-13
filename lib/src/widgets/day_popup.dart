@@ -130,7 +130,7 @@ class _DayDialogState extends State<DayDialog> {
       } else {
         context
             .read<WorkoutModel>()
-            .editDay(id: day!.id, description: description);
+            .editDay(day: day!, description: description);
       }
       Navigator.of(context).pop();
     }
