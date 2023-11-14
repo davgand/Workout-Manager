@@ -35,8 +35,6 @@ def keystoreProperties = new Properties()
 // Load your keystore.properties file into the keystoreProperties object.
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-
-
 android {
     namespace "com.workout_manager"
     compileSdkVersion flutter.compileSdkVersion

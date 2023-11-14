@@ -30,6 +30,7 @@ class _WorkoutManagerState extends State<WorkoutManagerApp> {
               title: title,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
+              debugShowCheckedModeBanner: false,
               home: WorkoutScreen(workout: workout));
         }));
   }

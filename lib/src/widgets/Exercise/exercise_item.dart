@@ -24,76 +24,78 @@ class ExerciseItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-        key: Key(day.id.toString()),
-        startActionPane: ActionPane(
-          motion: const DrawerMotion(),
-          children: [
-            SlidableActionList(
-              action: ActionEnum.edit,
-              onPressed: (context) => editExercise(context, day, exercise),
-            ),
-            SlidableActionList(
-              action: ActionEnum.delete,
-              onPressed: (context) => deleteExercise(context, day, exercise),
-            ),
-          ],
-        ),
-        child: ListTile(
-            title: Row(
-              children: [
-                Expanded(
-                    flex: 30,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            style: AppStyles.exerciseTitleStyle,
-                            exercise.name,
-                            textAlign: TextAlign.start,
-                          )
-                        ])),
-                Expanded(
-                    flex: 15,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          if (exercise.reps == AppConstants.emptyValue)
+    return Consumer<WorkoutModel>(builder: (_, workout, __) {
+      return Slidable(
+          key: Key(day.id.toString()),
+          startActionPane: ActionPane(
+            motion: const DrawerMotion(),
+            children: [
+              SlidableActionList(
+                action: ActionEnum.edit,
+                onPressed: (context) => editExercise(context, day, exercise),
+              ),
+              SlidableActionList(
+                action: ActionEnum.delete,
+                onPressed: (context) => deleteExercise(context, day, exercise),
+              ),
+            ],
+          ),
+          child: ListTile(
+              title: Row(
+                children: [
+                  Expanded(
+                      flex: 30,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
                             Text(
-                                style: AppStyles.dataStyle,
-                                "${exercise.series}")
-                          else
-                            Text(
-                                style: AppStyles.dataStyle,
-                                "${exercise.series} x ${exercise.reps}"),
-                        ])),
-                if (exercise.weight != AppConstants.emptyValue)
+                              style: AppStyles.exerciseTitleStyle,
+                              exercise.name,
+                              textAlign: TextAlign.start,
+                            )
+                          ])),
                   Expanded(
                       flex: 15,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text(
-                                style: AppStyles.dataStyle,
-                                "${exercise.weight} kg"),
+                            if (exercise.reps == AppConstants.emptyValue)
+                              Text(
+                                  style: AppStyles.dataStyle,
+                                  "${exercise.series}")
+                            else
+                              Text(
+                                  style: AppStyles.dataStyle,
+                                  "${exercise.series} x ${exercise.reps}"),
                           ])),
-                if (exercise.time != AppConstants.emptyValue)
-                  Expanded(
-                      flex: 15,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                                style: AppStyles.dataStyle,
-                                "${exercise.time} s"),
-                          ])),
-              ],
-            ),
-            onTap: () {
-              if (exercise.notes.isNotEmpty) {
-                showNotes(context, exercise);
-              }
-            }));
+                  if (exercise.weight != AppConstants.emptyValue)
+                    Expanded(
+                        flex: 15,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                  style: AppStyles.dataStyle,
+                                  "${exercise.weight} kg"),
+                            ])),
+                  if (exercise.time != AppConstants.emptyValue)
+                    Expanded(
+                        flex: 15,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                  style: AppStyles.dataStyle,
+                                  "${exercise.time} s"),
+                            ])),
+                ],
+              ),
+              onTap: () {
+                if (exercise.notes.isNotEmpty) {
+                  showNotes(context, exercise);
+                }
+              }));
+    });
   }
 
   Future<void> showNotes(BuildContext context, Exercise exercise) {

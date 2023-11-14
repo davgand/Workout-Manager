@@ -40,7 +40,7 @@ class FileHandler {
       file.writeAsString(jsonEncode(workout.toJson()));
     } else {
       file.writeAsString(
-          jsonEncode(WorkoutModel(AppConstants.dummyDays).toJson()));
+          jsonEncode(WorkoutModel([]).toJson()));
     }
   }
 
