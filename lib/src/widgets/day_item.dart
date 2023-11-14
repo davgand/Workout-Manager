@@ -32,8 +32,8 @@ class DayItem extends StatelessWidget {
             ),
             SlidableAction(
               onPressed: (context) => deleteDay(context, day),
-              backgroundColor: Palette.red,
-              foregroundColor: Palette.white,
+              backgroundColor: Palette.white,
+              foregroundColor: Palette.red,
               icon: Icons.delete,
             ),
           ],

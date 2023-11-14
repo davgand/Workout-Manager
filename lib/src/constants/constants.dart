@@ -5,6 +5,7 @@ class AppConstants {
   static const fileName = "workout.json";
 
   static const emptyValue = 0;
+  static const emptyValueString = "";
 
   static List<Day> dummyDays = [
     Day.create(id: "day1", description: "Day 1", exercises: [

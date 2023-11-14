@@ -7,6 +7,7 @@ class Day {
   String description;
   List<Exercise> exercises;
   List<Warmup> warmups;
+  //List<Cardio> cardio;
 
   // Day();
   Day.create(
@@ -19,21 +20,20 @@ class Day {
     final exercisesData = json['exercises'] as List<dynamic>?;
     final warmupsData = json['warmups'] as List<dynamic>?;
     return Day.create(
-      id: json['id'],
-      description: json['description'],
-      exercises: exercisesData != null
-          ? exercisesData
-              .map((exercise) =>
-                  Exercise.fromJson(exercise as Map<String, dynamic>))
-              .toList()
-          : <Exercise>[],
+        id: json['id'],
+        description: json['description'],
+        exercises: exercisesData != null
+            ? exercisesData
+                .map((exercise) =>
+                    Exercise.fromJson(exercise as Map<String, dynamic>))
+                .toList()
+            : <Exercise>[],
         warmups: warmupsData != null
             ? warmupsData
                 .map(
                     (warmup) => Warmup.fromJson(warmup as Map<String, dynamic>))
                 .toList()
-            : <Warmup>[]
-    );
+            : <Warmup>[]);
   }
 
   Map<String, dynamic> toJson() {

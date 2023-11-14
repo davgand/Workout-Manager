@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/screens/exercise_page.dart';
+import 'package:workout_manager/src/screens/warmup_page.dart';
 import 'package:workout_manager/src/widgets/workout_type_item.dart';
 
 class DayDetailsPage extends StatefulWidget {
@@ -49,9 +50,9 @@ class _DayDetailsPageState extends State<DayDetailsPage> {
                     title: AppLocalizations.of(context).warmup,
                     icon: Icons.thermostat,
                     bgColor: Palette.blue,
-                    navigateTo: ExercisePage(
+                    navigateTo: WarmupPage(
                       day: day,
-                      exercises: day.exercises,
+                      warmups: day.warmups,
                     ))),
             Expanded(
                 child: WorkoutTypeItem(

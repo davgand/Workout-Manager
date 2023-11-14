@@ -29,7 +29,7 @@
     }
   },
   "no_days_in_list": "Non sono presenti giornate,\naggiungine una premendo il pulsante +!",
-  "no_exercises_in_list": "Non sono presenti esercisi,\naggiungine uno premendo il pulsante +!",
+  "no_exercises_in_list": "Non sono presenti esercizi,\naggiungine uno premendo il pulsante +!",
   "description": "Descrizione",
   "reps": "Ripetizioni",
   "series": "Serie",
@@ -41,5 +41,16 @@
   "exercise": "{count, plural, one{Esercizio} other{Esercizi}}",
   "workout": "{count, plural, one{Allenamento} other{Allenamenti}}",
   "warmup": "Riscaldamento",
-  "cardio": "Cardio"
+  "cardio": "Cardio",
+  "type": "Tipo",
+  "other": "Altro",
+  "neck": "Collo",
+  "shoulder": "Spalle",
+  "arm": "Braccia",
+  "wrist": "Polsi",
+  "fingers": "Dita",
+  "torso": "Torso",
+  "leg": "Gambe",
+  "knee": "Ginocchia",
+  "foot": "Piedi"
 }

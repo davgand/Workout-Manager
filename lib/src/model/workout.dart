@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
+import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/exercise.dart';
+import 'package:workout_manager/src/model/warmup.dart';
 import 'package:workout_manager/src/provider/fileHandler.dart';
 
 import 'day.dart';
@@ -128,5 +130,47 @@ class WorkoutModel extends ChangeNotifier {
         weight: days[dayIndex].exercises[exerciseIndex].weight,
         notes: days[dayIndex].exercises[exerciseIndex].notes);
     return result;
+  }
+
+  void addWarmup(Day day, String name, WarmupType type, int series,
+      [int reps = 0, int time = 0, String notes = ""]) {
+    var uuid = Uuid();
+
+    var warmup = Warmup(
+        id: uuid.v1(),
+        name: name,
+        type: type,
+        reps: reps,
+        series: series,
+        time: time,
+        notes: notes);
+
+    days[days.indexOf(day)].warmups.add(warmup);
+
+    FileHandler.writeWorkout(WorkoutModel(days));
+    notifyListeners();
+  }
+
+  void editWarmup(
+      Day day, Warmup warmup, String name, WarmupType type, int series,
+      [int reps = 0, int time = 0, String notes = ""]) {
+    var dayIndex = days.indexOf(day);
+    var index = days[dayIndex].warmups.indexOf(warmup);
+    days[dayIndex].warmups[index].name = name;
+    days[dayIndex].warmups[index].reps = reps;
+    days[dayIndex].warmups[index].type = type;
+    days[dayIndex].warmups[index].series = series;
+    days[dayIndex].warmups[index].time = series;
+    days[dayIndex].warmups[index].notes = notes;
+
+    FileHandler.writeWorkout(WorkoutModel(days));
+    notifyListeners();
+  }
+
+  void deleteWarmup(Day day, Warmup warmup) {
+    days[days.indexOf(day)].warmups.remove(warmup);
+
+    FileHandler.writeWorkout(WorkoutModel(days));
+    notifyListeners();
   }
 }

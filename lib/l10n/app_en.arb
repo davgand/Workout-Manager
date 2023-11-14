@@ -41,5 +41,16 @@
   "exercise": "{count, plural, one{Exercise} other{Exercises}}",
   "workout": "{count, plural, one{Workout} other{Workouts}}",
   "warmup": "Warmup",
-  "cardio": "Cardio"
+  "cardio": "Cardio",
+  "type": "Type",
+  "other": "Other",
+  "neck": "Neck",
+  "shoulder": "Shoulder",
+  "arm": "Arm",
+  "wrist": "Wrist",
+  "fingers": "Fingers",
+  "torso": "Torso",
+  "leg": "Leg",
+  "knee": "Knee",
+  "foot": "Foot"
 }
