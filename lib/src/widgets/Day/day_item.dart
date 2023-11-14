@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
+import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/screens/day_details_page.dart';
 import 'package:workout_manager/src/widgets/Day/day_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:workout_manager/src/widgets/slidable_action.dart';
 
 class DayItem extends StatelessWidget {
   final Day day;
@@ -24,17 +26,13 @@ class DayItem extends StatelessWidget {
           motion: const DrawerMotion(),
           //dismissible: DismissiblePane(onDismissed: () {}),
           children: [
-            SlidableAction(
+            SlidableActionList(
+              action: ActionEnum.edit,
               onPressed: (context) => editDay(context, day),
-              backgroundColor: Palette.white,
-              foregroundColor: Palette.grey,
-              icon: Icons.edit,
             ),
-            SlidableAction(
+            SlidableActionList(
+              action: ActionEnum.delete,
               onPressed: (context) => deleteDay(context, day),
-              backgroundColor: Palette.white,
-              foregroundColor: Palette.red,
-              icon: Icons.delete,
             ),
           ],
         ),

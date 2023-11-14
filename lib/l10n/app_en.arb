@@ -36,6 +36,7 @@
   "time": "Time",
   "weight": "Weight",
   "notes": "Notes",
+  "distance": "Distance",
   "enter_value_message": "Please enter a value",
   "day": "{count, plural, one{Day} other{Days}}",
   "exercise": "{count, plural, one{Exercise} other{Exercises}}",

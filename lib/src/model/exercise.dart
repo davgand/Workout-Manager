@@ -16,7 +16,7 @@ class Exercise {
       required this.series,
       this.time = AppConstants.emptyValue,
       this.weight = AppConstants.emptyValue,
-      this.notes = ""});
+      this.notes = AppConstants.emptyValueString});
 
   factory Exercise.fromJson(Map<String, dynamic> json) => Exercise(
         id: json['id'],

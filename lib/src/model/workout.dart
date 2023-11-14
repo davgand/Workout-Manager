@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:workout_manager/src/constants/enums.dart';
+import 'package:workout_manager/src/model/cardio.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/model/warmup.dart';
 import 'package:workout_manager/src/provider/fileHandler.dart';
@@ -169,6 +170,55 @@ class WorkoutModel extends ChangeNotifier {
 
   void deleteWarmup(Day day, Warmup warmup) {
     days[days.indexOf(day)].warmups.remove(warmup);
+
+    FileHandler.writeWorkout(WorkoutModel(days));
+    notifyListeners();
+  }
+
+  void addCardio(Day day, String name,
+      [int series = 0,
+      int reps = 0,
+      int time = 0,
+      int distance = 0,
+      String notes = ""]) {
+    var uuid = Uuid();
+
+    var cardio = Cardio(
+        id: uuid.v1(),
+        name: name,
+        distance: distance,
+        reps: reps,
+        series: series,
+        time: time,
+        notes: notes);
+
+    days[days.indexOf(day)].cardio.add(cardio);
+
+    FileHandler.writeWorkout(WorkoutModel(days));
+    notifyListeners();
+  }
+
+  void editCardio(Day day, Cardio cardio, String name,
+      [int series = 0,
+      int reps = 0,
+      int time = 0,
+      int distance = 0,
+      String notes = ""]) {
+    var dayIndex = days.indexOf(day);
+    var index = days[dayIndex].cardio.indexOf(cardio);
+    days[dayIndex].cardio[index].name = name;
+    days[dayIndex].cardio[index].reps = reps;
+    days[dayIndex].cardio[index].distance = distance;
+    days[dayIndex].cardio[index].series = series;
+    days[dayIndex].cardio[index].time = time;
+    days[dayIndex].cardio[index].notes = notes;
+
+    FileHandler.writeWorkout(WorkoutModel(days));
+    notifyListeners();
+  }
+
+  void deleteCardio(Day day, Cardio cardio) {
+    days[days.indexOf(day)].cardio.remove(cardio);
 
     FileHandler.writeWorkout(WorkoutModel(days));
     notifyListeners();

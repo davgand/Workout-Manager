@@ -5,21 +5,20 @@ import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/constants/constants.dart';
 import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/day.dart';
-import 'package:workout_manager/src/model/exercise.dart';
+import 'package:workout_manager/src/model/cardio.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:workout_manager/src/widgets/Cardio/cardio_popup.dart';
 import 'package:workout_manager/src/widgets/slidable_action.dart';
 
-import 'exercise_popup.dart';
-
-class ExerciseItem extends StatelessWidget {
-  final Exercise exercise;
+class CardioItem extends StatelessWidget {
+  final Cardio cardio;
   final Day day;
 
-  const ExerciseItem({
+  const CardioItem({
     super.key,
     required this.day,
-    required this.exercise,
+    required this.cardio,
   });
 
   @override
@@ -31,11 +30,11 @@ class ExerciseItem extends StatelessWidget {
           children: [
             SlidableActionList(
               action: ActionEnum.edit,
-              onPressed: (context) => editExercise(context, day, exercise),
+              onPressed: (context) => editCardio(context, day, cardio),
             ),
             SlidableActionList(
               action: ActionEnum.delete,
-              onPressed: (context) => deleteExercise(context, day, exercise),
+              onPressed: (context) => deleteCardio(context, day, cardio),
             ),
           ],
         ),
@@ -49,7 +48,7 @@ class ExerciseItem extends StatelessWidget {
                         children: [
                           Text(
                             style: AppStyles.exerciseTitleStyle,
-                            exercise.name,
+                            cardio.name,
                             textAlign: TextAlign.start,
                           )
                         ])),
@@ -58,16 +57,18 @@ class ExerciseItem extends StatelessWidget {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          if (exercise.reps == AppConstants.emptyValue)
+                          if (cardio.reps != AppConstants.emptyValue &&
+                              cardio.series != AppConstants.emptyValue)
                             Text(
                                 style: AppStyles.dataStyle,
-                                "${exercise.series}")
-                          else
+                                "${cardio.series} x ${cardio.reps}")
+                          else if (cardio.reps != AppConstants.emptyValue)
+                            Text(style: AppStyles.dataStyle, "${cardio.reps}")
+                          else if (cardio.series != AppConstants.emptyValue)
                             Text(
-                                style: AppStyles.dataStyle,
-                                "${exercise.series} x ${exercise.reps}"),
+                                style: AppStyles.dataStyle, "${cardio.series}"),
                         ])),
-                if (exercise.weight != AppConstants.emptyValue)
+                if (cardio.distance != AppConstants.emptyValue)
                   Expanded(
                       flex: 15,
                       child: Column(
@@ -75,9 +76,9 @@ class ExerciseItem extends StatelessWidget {
                           children: [
                             Text(
                                 style: AppStyles.dataStyle,
-                                "${exercise.weight} kg"),
+                                "${cardio.distance} km"),
                           ])),
-                if (exercise.time != AppConstants.emptyValue)
+                if (cardio.time != AppConstants.emptyValue)
                   Expanded(
                       flex: 15,
                       child: Column(
@@ -85,24 +86,24 @@ class ExerciseItem extends StatelessWidget {
                           children: [
                             Text(
                                 style: AppStyles.dataStyle,
-                                "${exercise.time} s"),
+                                "${cardio.time} min"),
                           ])),
               ],
             ),
             onTap: () {
-              if (exercise.notes.isNotEmpty) {
-                showNotes(context, exercise);
+              if (cardio.notes.isNotEmpty) {
+                showNotes(context, cardio);
               }
             }));
   }
 
-  Future<void> showNotes(BuildContext context, Exercise exercise) {
+  Future<void> showNotes(BuildContext context, Cardio cardio) {
     return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(AppLocalizations.of(context).notes),
-            content: Text(exercise.notes),
+            content: Text(cardio.notes),
             actions: <Widget>[
               TextButton(
                 child: Text(AppLocalizations.of(context).ok),
@@ -115,16 +116,15 @@ class ExerciseItem extends StatelessWidget {
         });
   }
 
-  Future<void> editExercise(BuildContext context, Day day, Exercise exercise) {
+  Future<void> editCardio(BuildContext context, Day day, Cardio cardio) {
     return showDialog(
         context: context,
         builder: (context) {
-          return ExerciseDialog(day, exercise);
+          return CardioDialog(day, cardio);
         });
   }
 
-  Future<void> deleteExercise(
-      BuildContext context, Day day, Exercise exercise) {
+  Future<void> deleteCardio(BuildContext context, Day day, Cardio cardio) {
     return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button
@@ -137,7 +137,7 @@ class ExerciseItem extends StatelessWidget {
               child: ListBody(
                 children: <Widget>[
                   Text(AppLocalizations.of(context)
-                      .delete_exercise_list_dialog_body(exercise.name)),
+                      .delete_exercise_list_dialog_body(cardio.name)),
                 ],
               ),
             ),
@@ -145,7 +145,7 @@ class ExerciseItem extends StatelessWidget {
               TextButton(
                 child: Text(AppLocalizations.of(context).yes),
                 onPressed: () {
-                  context.read<WorkoutModel>().deleteExercise(day, exercise);
+                  context.read<WorkoutModel>().deleteCardio(day, cardio);
                   Navigator.of(context).pop();
                 },
               ),

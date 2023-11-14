@@ -12,3 +12,5 @@ enum WarmupType {
 }
 
 enum ExerciseEnum { normal, cardio, warmup }
+
+enum ActionEnum { edit, delete }
