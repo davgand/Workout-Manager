@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_manager/src/model/day.dart';
-import 'package:workout_manager/src/widgets/day_item.dart';
+import 'package:workout_manager/src/widgets/Day/day_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DaysList extends StatelessWidget {

@@ -5,7 +5,7 @@ import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/screens/day_details_page.dart';
-import 'package:workout_manager/src/widgets/day_popup.dart';
+import 'package:workout_manager/src/widgets/Day/day_popup.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DayItem extends StatelessWidget {
@@ -74,8 +74,8 @@ class DayItem extends StatelessWidget {
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(
-                AppLocalizations.of(context).delete_day_list_dialog_title),
+            title:
+                Text(AppLocalizations.of(context).delete_day_list_dialog_title),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[

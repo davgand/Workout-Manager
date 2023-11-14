@@ -7,8 +7,8 @@ import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/warmup.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/widgets/breadcrumb.dart';
-import 'package:workout_manager/src/widgets/warmup_item.dart';
-import 'package:workout_manager/src/widgets/warmup_popup.dart';
+import 'package:workout_manager/src/widgets/Warmup/warmup_item.dart';
+import 'package:workout_manager/src/widgets/Warmup/warmup_popup.dart';
 
 class WarmupPage extends StatelessWidget {
   final List<Warmup> warmups;

@@ -5,9 +5,9 @@ import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/widgets/breadcrumb.dart';
-import 'package:workout_manager/src/widgets/exercise_item.dart';
+import 'package:workout_manager/src/widgets/Exercise/exercise_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:workout_manager/src/widgets/exercise_popup.dart';
+import 'package:workout_manager/src/widgets/Exercise/exercise_popup.dart';
 
 class ExercisePage extends StatelessWidget {
   final List<Exercise> exercises;

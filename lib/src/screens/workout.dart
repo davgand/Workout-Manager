@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/workout.dart';
-import 'package:workout_manager/src/widgets/day_popup.dart';
-import 'package:workout_manager/src/widgets/days_list.dart';
+import 'package:workout_manager/src/widgets/Day/day_popup.dart';
+import 'package:workout_manager/src/widgets/Day/days_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WorkoutScreen extends StatefulWidget {
