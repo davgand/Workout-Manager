@@ -63,7 +63,7 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
               Text("\n"),
               Text(
                 AppLocalizations.of(context)!.help_dialog_credits,
-                style: AppStyles.smallStyle,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ])),
             actions: <Widget>[

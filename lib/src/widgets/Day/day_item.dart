@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/workout.dart';
@@ -41,7 +40,8 @@ class DayItem extends StatelessWidget {
             children: [
               Expanded(
                 flex: 2,
-                child: Text(day.description, style: AppStyles.dayListStyle),
+                child: Text(day.description,
+                    style: Theme.of(context).textTheme.headlineMedium),
               ),
             ],
           ),

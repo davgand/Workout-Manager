@@ -37,6 +37,7 @@ class ExercisePage extends StatelessWidget {
           child: const Icon(Icons.add),
         ),
         appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: Breadcrumb(
               startPage: day.description,
               endPage: AppLocalizations.of(context)!.exercise(2)),

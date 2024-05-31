@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/constants/constants.dart';
 import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/day.dart';
@@ -47,48 +46,58 @@ class ExerciseItem extends StatelessWidget {
               title: Row(
                 children: [
                   Expanded(
-                      flex: 30,
+                      flex: 2,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              style: AppStyles.exerciseTitleStyle,
+                              style: Theme.of(context).textTheme.titleMedium,
                               exercise.name,
                               textAlign: TextAlign.start,
                             )
                           ])),
                   Expanded(
-                      flex: 15,
+                      flex: 1,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             if (exercise.reps == AppConstants.emptyValue)
                               Text(
-                                  style: AppStyles.dataStyle,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                   "${exercise.series}")
                             else
                               Text(
-                                  style: AppStyles.dataStyle,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                   "${exercise.series} x ${exercise.reps}"),
                           ])),
                   if (exercise.weight != AppConstants.emptyValue)
                     Expanded(
-                        flex: 15,
+                        flex: 1,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                  style: AppStyles.dataStyle,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                   "${exercise.weight} kg"),
+                            ])),
+                  if (exercise.rest != AppConstants.emptyValue)
+                    Expanded(
+                        flex: 1,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  "${exercise.rest} s"),
                             ])),
                   if (exercise.time != AppConstants.emptyValue)
                     Expanded(
-                        flex: 15,
+                        flex: 1,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                  style: AppStyles.dataStyle,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                   "${exercise.time} s"),
                             ])),
                 ],

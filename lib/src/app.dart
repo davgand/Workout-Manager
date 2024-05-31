@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/screens/workout.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,6 +29,7 @@ class _WorkoutManagerState extends State<WorkoutManagerApp> {
         child: Consumer<WorkoutModel>(builder: (_, workout, __) {
           return MaterialApp(
               title: title,
+              theme: AppStyles.defaultTheme,
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               debugShowCheckedModeBanner: false,

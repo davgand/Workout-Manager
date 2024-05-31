@@ -24,6 +24,7 @@ class WarmupEdit extends StatefulWidget {
 class _WarmupEditState extends State<WarmupEdit> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController repsController = TextEditingController();
+  TextEditingController restController = TextEditingController();
   TextEditingController seriesController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController notesController = TextEditingController();
@@ -48,6 +49,10 @@ class _WarmupEditState extends State<WarmupEdit> {
         ..text = warmup!.reps == AppConstants.emptyValue
             ? ""
             : warmup!.reps.toString();
+      restController = TextEditingController()
+        ..text = warmup!.rest == AppConstants.emptyValue
+            ? ""
+            : warmup!.rest.toString();
       seriesController = TextEditingController()
         ..text = warmup!.series == AppConstants.emptyValue
             ? ""
@@ -66,6 +71,7 @@ class _WarmupEditState extends State<WarmupEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: Breadcrumb(
               startPage: day.description,
               endPage: isNew
@@ -170,6 +176,19 @@ class _WarmupEditState extends State<WarmupEdit> {
                                 ],
                                 decoration: InputDecoration(
                                     labelText:
+                                        AppLocalizations.of(context)!.rest),
+                                textInputAction: TextInputAction.next,
+                                controller: restController,
+                              ),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                decoration: InputDecoration(
+                                    labelText:
                                         AppLocalizations.of(context)!.time),
                                 textInputAction: TextInputAction.next,
                                 controller: timeController,
@@ -197,22 +216,14 @@ class _WarmupEditState extends State<WarmupEdit> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        ElevatedButton(
+                        FilledButton(
                           onPressed: () {
                             saveWarmup(context, day);
                           },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStateProperty.all(Palette.blue),
-                          ),
                           child: Text(AppLocalizations.of(context)!.ok),
                         ),
-                        ElevatedButton(
+                        OutlinedButton(
                           onPressed: () => {Navigator.of(context).pop()},
-                          style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStateProperty.all(Palette.white),
-                          ),
                           child: Text(
                             AppLocalizations.of(context)!.cancel,
                             style: TextStyle(color: Palette.blue),
@@ -229,6 +240,7 @@ class _WarmupEditState extends State<WarmupEdit> {
     // Clean up the controllers when the widget is disposed.
     descriptionController.dispose();
     repsController.dispose();
+    restController.dispose();
     seriesController.dispose();
     timeController.dispose();
     notesController.dispose();
@@ -246,6 +258,7 @@ class _WarmupEditState extends State<WarmupEdit> {
     if (_formKey.currentState!.validate()) {
       String description = descriptionController.text;
       int reps = int.tryParse(repsController.text) ?? AppConstants.emptyValue;
+      int rest = int.tryParse(restController.text) ?? AppConstants.emptyValue;
       int series =
           int.tryParse(seriesController.text) ?? AppConstants.emptyValue;
       int time = int.tryParse(timeController.text) ?? AppConstants.emptyValue;
@@ -254,10 +267,10 @@ class _WarmupEditState extends State<WarmupEdit> {
       if (isNew) {
         context
             .read<WorkoutModel>()
-            .addWarmup(day, description, type, series, reps, time, notes);
+            .addWarmup(day, description, type, series, reps, rest, time, notes);
       } else {
         context.read<WorkoutModel>().editWarmup(
-            day, warmup!, description, type, series, reps, time, notes);
+            day, warmup!, description, type, series, reps, rest, time, notes);
       }
       Navigator.of(context).pop();
     }

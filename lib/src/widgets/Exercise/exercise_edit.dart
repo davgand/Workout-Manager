@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/constants/constants.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
@@ -23,6 +22,7 @@ class _ExerciseEditState extends State<ExerciseEdit> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController repsController = TextEditingController();
   TextEditingController seriesController = TextEditingController();
+  TextEditingController restController = TextEditingController();
   TextEditingController timeController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController notesController = TextEditingController();
@@ -46,6 +46,10 @@ class _ExerciseEditState extends State<ExerciseEdit> {
         ..text = exercise!.series == AppConstants.emptyValue
             ? ""
             : exercise!.series.toString();
+      restController = TextEditingController()
+        ..text = exercise!.rest == AppConstants.emptyValue
+            ? ""
+            : exercise!.rest.toString();
       timeController = TextEditingController()
         ..text = exercise!.time == AppConstants.emptyValue
             ? ""
@@ -63,6 +67,7 @@ class _ExerciseEditState extends State<ExerciseEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: Breadcrumb(
               startPage: day.description,
               endPage: isNew
@@ -161,6 +166,24 @@ class _ExerciseEditState extends State<ExerciseEdit> {
                                       decoration: InputDecoration(
                                           labelText:
                                               AppLocalizations.of(context)!
+                                                  .rest),
+                                      textInputAction: TextInputAction.next,
+                                      controller: restController,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.digitsOnly
+                                      ],
+                                      decoration: InputDecoration(
+                                          labelText:
+                                              AppLocalizations.of(context)!
                                                   .time),
                                       textInputAction: TextInputAction.next,
                                       controller: timeController,
@@ -190,25 +213,16 @@ class _ExerciseEditState extends State<ExerciseEdit> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            ElevatedButton(
+                            FilledButton(
                               onPressed: () {
                                 saveExercise(context, day);
                               },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    WidgetStateProperty.all(Palette.blue),
-                              ),
                               child: Text(AppLocalizations.of(context)!.ok),
                             ),
-                            ElevatedButton(
+                            OutlinedButton(
                               onPressed: () => {Navigator.of(context).pop()},
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    WidgetStateProperty.all(Palette.white),
-                              ),
                               child: Text(
                                 AppLocalizations.of(context)!.cancel,
-                                style: TextStyle(color: Palette.blue),
                               ),
                             ),
                           ],
@@ -240,6 +254,8 @@ class _ExerciseEditState extends State<ExerciseEdit> {
     if (_formKey.currentState!.validate()) {
       String description = descriptionController.text;
       int reps = int.tryParse(repsController.text) ?? AppConstants.emptyValue;
+      int rest = int.tryParse(restController.text) ?? AppConstants.emptyValue;
+
       int series =
           int.tryParse(seriesController.text) ?? AppConstants.emptyValue;
       int time = int.tryParse(timeController.text) ?? AppConstants.emptyValue;
@@ -250,10 +266,12 @@ class _ExerciseEditState extends State<ExerciseEdit> {
       if (isNew) {
         context
             .read<WorkoutModel>()
-            .addExercise(day, description, series, reps, time, weight, notes);
+            .addExercise(
+            day, description, series, reps, rest, time, weight, notes);
       } else {
         context.read<WorkoutModel>().editExercise(
-            day, exercise!, description, series, reps, time, weight, notes);
+            day, exercise!, description,
+            series, reps, rest, time, weight, notes);
       }
       Navigator.of(context).pop();
     }

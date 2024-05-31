@@ -78,13 +78,18 @@ class WorkoutModel extends ChangeNotifier {
   }
 
   void addExercise(Day day, String name, int series,
-      [int reps = 0, int time = 0, int weight = 0, String notes = ""]) {
+      [int reps = 0,
+      int rest = 0,
+      int time = 0,
+      int weight = 0,
+      String notes = ""]) {
     var uuid = Uuid();
 
     var exercise = Exercise(
         id: uuid.v1(),
         name: name,
         reps: reps,
+        rest: rest,
         series: series,
         time: time,
         weight: weight,
@@ -97,11 +102,16 @@ class WorkoutModel extends ChangeNotifier {
   }
 
   void editExercise(Day day, Exercise exercise, String name, int series,
-      [int reps = 0, int time = 0, int weight = 0, String notes = ""]) {
+      [int reps = 0,
+      int rest = 0,
+      int time = 0,
+      int weight = 0,
+      String notes = ""]) {
     var dayIndex = days.indexOf(day);
     var index = days[dayIndex].exercises.indexOf(exercise);
     days[dayIndex].exercises[index].name = name;
     days[dayIndex].exercises[index].reps = reps;
+    days[dayIndex].exercises[index].rest = rest;
     days[dayIndex].exercises[index].series = series;
     days[dayIndex].exercises[index].time = series;
     days[dayIndex].exercises[index].weight = weight;
@@ -126,6 +136,7 @@ class WorkoutModel extends ChangeNotifier {
         id: id,
         name: days[dayIndex].exercises[exerciseIndex].name,
         reps: days[dayIndex].exercises[exerciseIndex].reps,
+        rest: days[dayIndex].exercises[exerciseIndex].rest,
         series: days[dayIndex].exercises[exerciseIndex].series,
         time: days[dayIndex].exercises[exerciseIndex].time,
         weight: days[dayIndex].exercises[exerciseIndex].weight,
@@ -134,7 +145,7 @@ class WorkoutModel extends ChangeNotifier {
   }
 
   void addWarmup(Day day, String name, WarmupType type, int series,
-      [int reps = 0, int time = 0, String notes = ""]) {
+      [int reps = 0, int rest = 0, int time = 0, String notes = ""]) {
     var uuid = Uuid();
 
     var warmup = Warmup(
@@ -142,6 +153,7 @@ class WorkoutModel extends ChangeNotifier {
         name: name,
         type: type,
         reps: reps,
+        rest: rest,
         series: series,
         time: time,
         notes: notes);
@@ -154,11 +166,12 @@ class WorkoutModel extends ChangeNotifier {
 
   void editWarmup(
       Day day, Warmup warmup, String name, WarmupType type, int series,
-      [int reps = 0, int time = 0, String notes = ""]) {
+      [int reps = 0, int rest = 0, int time = 0, String notes = ""]) {
     var dayIndex = days.indexOf(day);
     var index = days[dayIndex].warmups.indexOf(warmup);
     days[dayIndex].warmups[index].name = name;
     days[dayIndex].warmups[index].reps = reps;
+    days[dayIndex].warmups[index].rest = rest;
     days[dayIndex].warmups[index].type = type;
     days[dayIndex].warmups[index].series = series;
     days[dayIndex].warmups[index].time = series;

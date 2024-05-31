@@ -5,20 +5,14 @@ class Cardio extends Exercise {
   int distance;
 
   Cardio({
-    required id,
-    required name,
+    required super.id,
+    required super.name,
     this.distance = AppConstants.emptyValue,
-    series = AppConstants.emptyValue,
-    reps = AppConstants.emptyValue,
-    time = AppConstants.emptyValue,
-    notes = AppConstants.emptyValueString,
-  }) : super(
-            id: id,
-            name: name,
-            series: series,
-            reps: reps,
-            time: time,
-            notes: notes);
+    super.series = AppConstants.emptyValue,
+    super.reps = AppConstants.emptyValue,
+    super.time = AppConstants.emptyValue,
+    super.notes = AppConstants.emptyValueString,
+  });
 
   factory Cardio.fromJson(Map<String, dynamic> json) => Cardio(
         id: json['id'],

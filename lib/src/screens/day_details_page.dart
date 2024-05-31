@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/screens/cardio_page.dart';
 import 'package:workout_manager/src/screens/exercise_page.dart';
@@ -32,8 +31,11 @@ class _DayDetailsPageState extends State<DayDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(day.description),
-        ),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            title: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(day.description),
+            )),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -41,7 +43,7 @@ class _DayDetailsPageState extends State<DayDetailsPage> {
                 child: WorkoutTypeItem(
                     title: AppLocalizations.of(context)!.cardio,
                     icon: Icons.pedal_bike_sharp,
-                    bgColor: Palette.lightBlue,
+                    bgColor: Theme.of(context).colorScheme.secondary,
                     navigateTo: CardioPage(
                       day: day,
                       cardio: day.cardio,
@@ -50,7 +52,7 @@ class _DayDetailsPageState extends State<DayDetailsPage> {
                 child: WorkoutTypeItem(
                     title: AppLocalizations.of(context)!.warmup,
                     icon: Icons.thermostat,
-                    bgColor: Palette.blue,
+                    bgColor: Theme.of(context).colorScheme.primary,
                     navigateTo: WarmupPage(
                       day: day,
                       warmups: day.warmups,
@@ -59,7 +61,7 @@ class _DayDetailsPageState extends State<DayDetailsPage> {
                 child: WorkoutTypeItem(
                     title: AppLocalizations.of(context)!.exercise(2),
                     icon: Icons.sports_gymnastics_sharp,
-                    bgColor: Palette.darkBlue,
+                    bgColor: Theme.of(context).colorScheme.tertiary,
                     navigateTo: ExercisePage(
                       day: day,
                       exercises: day.exercises,

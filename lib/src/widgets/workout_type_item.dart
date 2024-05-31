@@ -27,7 +27,7 @@ class WorkoutTypeItem extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.start,
-                    style: AppStyles.workoutTypeStyle,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   )
                 ])),
         tileColor: bgColor,

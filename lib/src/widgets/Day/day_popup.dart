@@ -77,22 +77,14 @@ class _DayDialogState extends State<DayDialog> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          ElevatedButton(
+                          FilledButton(
                             onPressed: () {
                               saveDay(context);
                             },
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Palette.blue),
-                            ),
                             child: Text(AppLocalizations.of(context)!.ok),
                           ),
-                          ElevatedButton(
+                          OutlinedButton(
                             onPressed: () => {Navigator.of(context).pop()},
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Palette.white),
-                            ),
                             child: Text(
                               AppLocalizations.of(context)!.cancel,
                               style: TextStyle(color: Palette.blue),

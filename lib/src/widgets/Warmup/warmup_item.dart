@@ -30,7 +30,7 @@ class WarmupItem extends StatelessWidget {
           child: Column(children: [
             Text(
               WarmupTypeHelper.toValue(type, context),
-              style: AppStyles.exerciseTitleStyle,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             ListView.builder(
                 itemCount: warmups.length,
@@ -70,7 +70,9 @@ class WarmupItem extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      style: AppStyles.exerciseTitleStyle,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
                                       warmups[index].name,
                                       textAlign: TextAlign.start,
                                     )
@@ -85,6 +87,19 @@ class WarmupItem extends StatelessWidget {
                                   Text(
                                       "${warmups[index].series} x ${warmups[index].reps}"),
                               ])),
+                            if (warmups[index].rest != AppConstants.emptyValue)
+                              Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium,
+                                            "${warmups[index].rest} s"),
+                                      ])),
                           if (warmups[index].time != AppConstants.emptyValue)
                             Expanded(
                                 flex: 1,

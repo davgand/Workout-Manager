@@ -63,6 +63,7 @@ class _CardioEditState extends State<CardioEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: Breadcrumb(
               startPage: day.description,
               endPage: isNew
@@ -182,7 +183,7 @@ class _CardioEditState extends State<CardioEdit> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        ElevatedButton(
+                        FilledButton(
                           onPressed: () {
                             saveCardio(context, day);
                           },
@@ -192,15 +193,10 @@ class _CardioEditState extends State<CardioEdit> {
                           ),
                           child: Text(AppLocalizations.of(context)!.ok),
                         ),
-                        ElevatedButton(
+                        OutlinedButton(
                           onPressed: () => {Navigator.of(context).pop()},
-                          style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStateProperty.all(Palette.white),
-                          ),
                           child: Text(
                             AppLocalizations.of(context)!.cancel,
-                            style: TextStyle(color: Palette.blue),
                           ),
                         ),
                       ],

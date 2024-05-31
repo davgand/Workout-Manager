@@ -5,6 +5,7 @@ class Exercise {
   String name;
   int reps;
   int series;
+  int rest;
   int time;
   int weight;
   String notes;
@@ -14,6 +15,7 @@ class Exercise {
       required this.name,
       this.reps = AppConstants.emptyValue,
       required this.series,
+      this.rest = AppConstants.emptyValue,
       this.time = AppConstants.emptyValue,
       this.weight = AppConstants.emptyValue,
       this.notes = AppConstants.emptyValueString});
@@ -23,6 +25,7 @@ class Exercise {
         name: json['name'],
         reps: json['reps'],
         series: json['series'],
+        rest: json['rest'],
         time: json['time'],
         weight: json['weight'],
         notes: json['notes'],
@@ -34,6 +37,7 @@ class Exercise {
       'name': name,
       'reps': reps,
       'series': series,
+      'rest': rest,
       'time': time,
       'weight': weight,
       'notes': notes,

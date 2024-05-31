@@ -6,14 +6,15 @@ class Warmup extends Exercise {
   WarmupType type;
 
   Warmup({
-    required id,
-    required name,
+    required super.id,
+    required super.name,
     required this.type,
-    required series,
-    reps = AppConstants.emptyValue,
-    time = AppConstants.emptyValue,
-    notes = AppConstants.emptyValueString,
-  }) : super(id: id, name: name, series: series, reps: reps, notes: notes);
+    required super.series,
+    super.reps = AppConstants.emptyValue,
+    super.rest = AppConstants.emptyValue,
+    super.time = AppConstants.emptyValue,
+    super.notes = AppConstants.emptyValueString,
+  });
 
   factory Warmup.fromJson(Map<String, dynamic> json) => Warmup(
         id: json['id'],
@@ -21,6 +22,7 @@ class Warmup extends Exercise {
         type: WarmupType.values.byName(json['type']),
         series: json['series'],
         reps: json['reps'],
+        rest: json['rest'],
         time: json['time'],
         notes: json['notes'],
       );
@@ -33,6 +35,7 @@ class Warmup extends Exercise {
       'type': type.name,
       'series': series,
       'reps': reps,
+      'rest': rest,
       'time': time,
       'notes': notes,
     };

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/constants/constants.dart';
 import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/day.dart';
@@ -51,7 +50,7 @@ class CardioItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            style: AppStyles.exerciseTitleStyle,
+                            style: Theme.of(context).textTheme.titleMedium,
                             cardio.name,
                             textAlign: TextAlign.start,
                           )
@@ -64,13 +63,16 @@ class CardioItem extends StatelessWidget {
                           if (cardio.reps != AppConstants.emptyValue &&
                               cardio.series != AppConstants.emptyValue)
                             Text(
-                                style: AppStyles.dataStyle,
+                                style: Theme.of(context).textTheme.bodyMedium,
                                 "${cardio.series} x ${cardio.reps}")
                           else if (cardio.reps != AppConstants.emptyValue)
-                            Text(style: AppStyles.dataStyle, "${cardio.reps}")
+                            Text(
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                "${cardio.reps}")
                           else if (cardio.series != AppConstants.emptyValue)
                             Text(
-                                style: AppStyles.dataStyle, "${cardio.series}"),
+                                style: Theme.of(context).textTheme.bodyMedium,
+                                "${cardio.series}"),
                         ])),
                 if (cardio.distance != AppConstants.emptyValue)
                   Expanded(
@@ -79,7 +81,7 @@ class CardioItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                                style: AppStyles.dataStyle,
+                                style: Theme.of(context).textTheme.bodyMedium,
                                 "${cardio.distance} km"),
                           ])),
                 if (cardio.time != AppConstants.emptyValue)
@@ -89,7 +91,7 @@ class CardioItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                                style: AppStyles.dataStyle,
+                                style: Theme.of(context).textTheme.bodyMedium,
                                 "${cardio.time} min"),
                           ])),
               ],
