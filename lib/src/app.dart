@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/screens/workout.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WorkoutManagerApp extends StatefulWidget {
   const WorkoutManagerApp({super.key});

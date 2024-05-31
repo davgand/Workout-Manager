@@ -28,6 +28,8 @@
       }
     }
   },
+  "add_new_exercise": "Nuovo esercizio",
+  "edit_exercise": "Modifica esercizio",
   "no_days_in_list": "Non sono presenti giornate,\naggiungine una premendo il pulsante +!",
   "no_exercises_in_list": "Non sono presenti esercizi,\naggiungine uno premendo il pulsante +!",
   "description": "Descrizione",
@@ -37,7 +39,7 @@
   "weight": "Peso",
   "notes": "Note",
   "distance": "Distanza",
-  "enter_value_message": "Please enter a value",
+  "enter_value_message": "Inserire un valore",
   "day": "{count, plural, one{Giorno} other{Giorni}}",
   "exercise": "{count, plural, one{Esercizio} other{Esercizi}}",
   "workout": "{count, plural, one{Allenamento} other{Allenamenti}}",

@@ -6,9 +6,9 @@ import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/warmup.dart';
 import 'package:workout_manager/src/model/workout.dart';
+import 'package:workout_manager/src/widgets/Warmup/warmup_edit.dart';
 import 'package:workout_manager/src/widgets/breadcrumb.dart';
 import 'package:workout_manager/src/widgets/Warmup/warmup_item.dart';
-import 'package:workout_manager/src/widgets/Warmup/warmup_popup.dart';
 
 class WarmupPage extends StatelessWidget {
   final List<Warmup> warmups;
@@ -27,7 +27,11 @@ class WarmupPage extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            displayWarmupDialog(context, day);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WarmupEdit(day),
+                ));
           },
           shape: AppStyles.floatButtonShape,
           child: const Icon(Icons.add),
@@ -35,12 +39,12 @@ class WarmupPage extends StatelessWidget {
         appBar: AppBar(
           title: Breadcrumb(
               startPage: day.description,
-              endPage: AppLocalizations.of(context).warmup),
+              endPage: AppLocalizations.of(context)!.warmup),
         ),
         body: warmups.isEmpty
             ? Center(
                 child: Text(
-                  AppLocalizations.of(context).no_exercises_in_list,
+                  AppLocalizations.of(context)!.no_exercises_in_list,
                   textAlign: TextAlign.center,
                 ),
               )
@@ -71,13 +75,5 @@ class WarmupPage extends StatelessWidget {
       if (!types.contains(warmup.type)) types.add(warmup.type);
     }
     return types;
-  }
-
-  Future<void> displayWarmupDialog(BuildContext context, Day day) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return WarmupDialog(day);
-        });
   }
 }

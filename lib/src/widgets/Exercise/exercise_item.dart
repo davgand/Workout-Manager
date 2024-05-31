@@ -8,9 +8,8 @@ import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:workout_manager/src/widgets/Exercise/exercise_edit.dart';
 import 'package:workout_manager/src/widgets/slidable_action.dart';
-
-import 'exercise_popup.dart';
 
 class ExerciseItem extends StatelessWidget {
   final Exercise exercise;
@@ -32,7 +31,11 @@ class ExerciseItem extends StatelessWidget {
             children: [
               SlidableActionList(
                 action: ActionEnum.edit,
-                onPressed: (context) => editExercise(context, day, exercise),
+                  onPressed: (context) => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExerciseEdit(day, exercise),
+                      ))
               ),
               SlidableActionList(
                 action: ActionEnum.delete,
@@ -103,25 +106,17 @@ class ExerciseItem extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context).notes),
+            title: Text(AppLocalizations.of(context)!.notes),
             content: Text(exercise.notes),
             actions: <Widget>[
               TextButton(
-                child: Text(AppLocalizations.of(context).ok),
+                child: Text(AppLocalizations.of(context)!.ok),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
             ],
           );
-        });
-  }
-
-  Future<void> editExercise(BuildContext context, Day day, Exercise exercise) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return ExerciseDialog(day, exercise);
         });
   }
 
@@ -133,26 +128,26 @@ class ExerciseItem extends StatelessWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalizations.of(context).delete_exercise_list_dialog_title,
+              AppLocalizations.of(context)!.delete_exercise_list_dialog_title,
             ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text(AppLocalizations.of(context)
+                  Text(AppLocalizations.of(context)!
                       .delete_exercise_list_dialog_body(exercise.name)),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: Text(AppLocalizations.of(context).yes),
+                child: Text(AppLocalizations.of(context)!.yes),
                 onPressed: () {
                   context.read<WorkoutModel>().deleteExercise(day, exercise);
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text(AppLocalizations.of(context).cancel),
+                child: Text(AppLocalizations.of(context)!.cancel),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

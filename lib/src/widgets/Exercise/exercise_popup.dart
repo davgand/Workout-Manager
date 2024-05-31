@@ -90,7 +90,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                           child: TextFormField(
                             decoration: InputDecoration(
                               labelText:
-                                  AppLocalizations.of(context).description,
+                                  AppLocalizations.of(context)!.description,
                             ),
                             textInputAction: TextInputAction.next,
                             controller: descriptionController,
@@ -112,7 +112,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                               ],
                               decoration: InputDecoration(
                                   labelText:
-                                      AppLocalizations.of(context).series),
+                                      AppLocalizations.of(context)!.series),
                               textInputAction: TextInputAction.next,
                               controller: seriesController,
                               validator: (value) => validateInput(value),
@@ -125,7 +125,8 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                                 FilteringTextInputFormatter.digitsOnly
                               ],
                               decoration: InputDecoration(
-                                  labelText: AppLocalizations.of(context).reps),
+                                  labelText:
+                                      AppLocalizations.of(context)!.reps),
                               textInputAction: TextInputAction.next,
                               controller: repsController,
                             ),
@@ -142,7 +143,8 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: InputDecoration(
-                                labelText: AppLocalizations.of(context).weight),
+                                labelText:
+                                    AppLocalizations.of(context)!.weight),
                             textInputAction: TextInputAction.next,
                             controller: weightController,
                           ),
@@ -154,7 +156,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             decoration: InputDecoration(
-                                labelText: AppLocalizations.of(context).time),
+                                labelText: AppLocalizations.of(context)!.time),
                             textInputAction: TextInputAction.next,
                             controller: timeController,
                           ),
@@ -166,7 +168,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                         Expanded(
                           child: TextFormField(
                             decoration: InputDecoration(
-                                labelText: AppLocalizations.of(context).notes),
+                                labelText: AppLocalizations.of(context)!.notes),
                             controller: notesController,
                             textInputAction: TextInputAction.done,
                           ),
@@ -186,18 +188,18 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
                             },
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Palette.blue),
+                                  WidgetStateProperty.all(Palette.blue),
                             ),
-                            child: Text(AppLocalizations.of(context).ok),
+                            child: Text(AppLocalizations.of(context)!.ok),
                           ),
                           ElevatedButton(
                             onPressed: () => {Navigator.of(context).pop()},
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Palette.white),
+                                  WidgetStateProperty.all(Palette.white),
                             ),
                             child: Text(
-                              AppLocalizations.of(context).cancel,
+                              AppLocalizations.of(context)!.cancel,
                               style: TextStyle(color: Palette.blue),
                             ),
                           ),
@@ -222,7 +224,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
 
   String? validateInput(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context).enter_value_message;
+      return AppLocalizations.of(context)!.enter_value_message;
     }
     return null;
   }

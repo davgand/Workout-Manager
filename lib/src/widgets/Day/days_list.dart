@@ -16,7 +16,7 @@ class DaysList extends StatelessWidget {
     return days.isEmpty
         ? Center(
             child: Text(
-              AppLocalizations.of(context).no_days_in_list,
+              AppLocalizations.of(context)!.no_days_in_list,
               textAlign: TextAlign.center,
             ),
           )

@@ -39,7 +39,7 @@ class _DayDetailsPageState extends State<DayDetailsPage> {
           children: [
             Expanded(
                 child: WorkoutTypeItem(
-                    title: AppLocalizations.of(context).cardio,
+                    title: AppLocalizations.of(context)!.cardio,
                     icon: Icons.pedal_bike_sharp,
                     bgColor: Palette.lightBlue,
                     navigateTo: CardioPage(
@@ -48,7 +48,7 @@ class _DayDetailsPageState extends State<DayDetailsPage> {
                     ))),
             Expanded(
                 child: WorkoutTypeItem(
-                    title: AppLocalizations.of(context).warmup,
+                    title: AppLocalizations.of(context)!.warmup,
                     icon: Icons.thermostat,
                     bgColor: Palette.blue,
                     navigateTo: WarmupPage(
@@ -57,7 +57,7 @@ class _DayDetailsPageState extends State<DayDetailsPage> {
                     ))),
             Expanded(
                 child: WorkoutTypeItem(
-                    title: AppLocalizations.of(context).exercise(2),
+                    title: AppLocalizations.of(context)!.exercise(2),
                     icon: Icons.sports_gymnastics_sharp,
                     bgColor: Palette.darkBlue,
                     navigateTo: ExercisePage(

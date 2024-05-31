@@ -9,8 +9,7 @@ import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/warmup.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import 'warmup_popup.dart';
+import 'package:workout_manager/src/widgets/Warmup/warmup_edit.dart';
 
 class WarmupItem extends StatelessWidget {
   final List<Warmup> warmups;
@@ -43,8 +42,12 @@ class WarmupItem extends StatelessWidget {
                       motion: const DrawerMotion(),
                       children: [
                         SlidableAction(
-                          onPressed: (context) =>
-                              editWarmup(context, day, warmups[index]),
+                          onPressed: (context) => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    WarmupEdit(day, warmups[index]),
+                              )),
                           backgroundColor: Palette.white,
                           foregroundColor: Palette.grey,
                           icon: Icons.edit,
@@ -88,16 +91,16 @@ class WarmupItem extends StatelessWidget {
                                 child: Column(children: [
                                   Text("${warmups[index].time} s"),
                                 ])),
-                          Expanded(
-                              flex: 2,
-                              child: Column(children: [
-                                Text(warmups[index].notes),
-                              ])),
+                            // Expanded(
+                            //     flex: 2,
+                            //     child: Column(children: [
+                            //       Text(warmups[index].notes),
+                            //     ])),
                         ],
                       ),
-                      // onTap: () {
-                      //   showNotes(context, warmup);
-                      //}
+                        onTap: () {
+                          showNotes(context, warmups[index]);
+                        }
                     )))
           ]));
     });
@@ -108,25 +111,17 @@ class WarmupItem extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context).notes),
+            title: Text(AppLocalizations.of(context)!.notes),
             content: Text(warmup.notes),
             actions: <Widget>[
               TextButton(
-                child: Text(AppLocalizations.of(context).ok),
+                child: Text(AppLocalizations.of(context)!.ok),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
             ],
           );
-        });
-  }
-
-  Future<void> editWarmup(BuildContext context, Day day, Warmup warmup) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return WarmupDialog(day, warmup);
         });
   }
 
@@ -137,26 +132,26 @@ class WarmupItem extends StatelessWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalizations.of(context).delete_exercise_list_dialog_title,
+              AppLocalizations.of(context)!.delete_exercise_list_dialog_title,
             ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text(AppLocalizations.of(context)
+                  Text(AppLocalizations.of(context)!
                       .delete_exercise_list_dialog_body(warmup.name)),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: Text(AppLocalizations.of(context).yes),
+                child: Text(AppLocalizations.of(context)!.yes),
                 onPressed: () {
                   context.read<WorkoutModel>().deleteWarmup(day, warmup);
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text(AppLocalizations.of(context).cancel),
+                child: Text(AppLocalizations.of(context)!.cancel),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

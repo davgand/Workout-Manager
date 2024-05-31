@@ -4,10 +4,10 @@ import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/model/workout.dart';
+import 'package:workout_manager/src/widgets/Exercise/exercise_edit.dart';
 import 'package:workout_manager/src/widgets/breadcrumb.dart';
 import 'package:workout_manager/src/widgets/Exercise/exercise_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:workout_manager/src/widgets/Exercise/exercise_popup.dart';
 
 class ExercisePage extends StatelessWidget {
   final List<Exercise> exercises;
@@ -26,7 +26,12 @@ class ExercisePage extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            displayExerciseDialog(context, day);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ExerciseEdit(day),
+              ),
+            );
           },
           shape: AppStyles.floatButtonShape,
           child: const Icon(Icons.add),
@@ -34,12 +39,12 @@ class ExercisePage extends StatelessWidget {
         appBar: AppBar(
           title: Breadcrumb(
               startPage: day.description,
-              endPage: AppLocalizations.of(context).exercise(2)),
+              endPage: AppLocalizations.of(context)!.exercise(2)),
         ),
         body: exercises.isEmpty
             ? Center(
                 child: Text(
-                  AppLocalizations.of(context).no_exercises_in_list,
+                  AppLocalizations.of(context)!.no_exercises_in_list,
                   textAlign: TextAlign.center,
                 ),
               )
@@ -51,13 +56,5 @@ class ExercisePage extends StatelessWidget {
                           exercise: exercises[index],
                         ));
               }));
-  }
-
-  Future<void> displayExerciseDialog(BuildContext context, Day day) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return ExerciseDialog(day);
-        });
   }
 }

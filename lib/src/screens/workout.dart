@@ -53,22 +53,22 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context).help_dialog_title),
+            title: Text(AppLocalizations.of(context)!.help_dialog_title),
             content: SingleChildScrollView(
                 child: ListBody(children: [
-              Text(AppLocalizations.of(context).help_dialog_body),
+              Text(AppLocalizations.of(context)!.help_dialog_body),
               Text("\n"),
-              Text(AppLocalizations.of(context).help_dialog_info),
+              Text(AppLocalizations.of(context)!.help_dialog_info),
               Text("\n"),
               Text("\n"),
               Text(
-                AppLocalizations.of(context).help_dialog_credits,
+                AppLocalizations.of(context)!.help_dialog_credits,
                 style: AppStyles.smallStyle,
               ),
             ])),
             actions: <Widget>[
               TextButton(
-                child: Text(AppLocalizations.of(context).ok),
+                child: Text(AppLocalizations.of(context)!.ok),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

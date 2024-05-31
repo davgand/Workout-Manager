@@ -62,7 +62,7 @@ class _DayDialogState extends State<DayDialog> {
                           child: TextFormField(
                             decoration: InputDecoration(
                               labelText:
-                                  AppLocalizations.of(context).description,
+                                  AppLocalizations.of(context)!.description,
                             ),
                             controller: descriptionController,
                             validator: (value) => validateInput(value),
@@ -83,18 +83,18 @@ class _DayDialogState extends State<DayDialog> {
                             },
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Palette.blue),
+                                  WidgetStateProperty.all(Palette.blue),
                             ),
-                            child: Text(AppLocalizations.of(context).ok),
+                            child: Text(AppLocalizations.of(context)!.ok),
                           ),
                           ElevatedButton(
                             onPressed: () => {Navigator.of(context).pop()},
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Palette.white),
+                                  WidgetStateProperty.all(Palette.white),
                             ),
                             child: Text(
-                              AppLocalizations.of(context).cancel,
+                              AppLocalizations.of(context)!.cancel,
                               style: TextStyle(color: Palette.blue),
                             ),
                           ),
@@ -114,7 +114,7 @@ class _DayDialogState extends State<DayDialog> {
 
   String? validateInput(String? value) {
     if (value == null || value.isEmpty) {
-      return AppLocalizations.of(context).enter_value_message;
+      return AppLocalizations.of(context)!.enter_value_message;
     }
     return null;
   }

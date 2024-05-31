@@ -8,7 +8,7 @@ import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/cardio.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:workout_manager/src/widgets/Cardio/cardio_popup.dart';
+import 'package:workout_manager/src/widgets/Cardio/cardio_edit.dart';
 import 'package:workout_manager/src/widgets/slidable_action.dart';
 
 class CardioItem extends StatelessWidget {
@@ -30,7 +30,11 @@ class CardioItem extends StatelessWidget {
           children: [
             SlidableActionList(
               action: ActionEnum.edit,
-              onPressed: (context) => editCardio(context, day, cardio),
+                onPressed: (context) => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CardioEdit(day, cardio),
+                    ))
             ),
             SlidableActionList(
               action: ActionEnum.delete,
@@ -102,25 +106,17 @@ class CardioItem extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context).notes),
+            title: Text(AppLocalizations.of(context)!.notes),
             content: Text(cardio.notes),
             actions: <Widget>[
               TextButton(
-                child: Text(AppLocalizations.of(context).ok),
+                child: Text(AppLocalizations.of(context)!.ok),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
             ],
           );
-        });
-  }
-
-  Future<void> editCardio(BuildContext context, Day day, Cardio cardio) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return CardioDialog(day, cardio);
         });
   }
 
@@ -131,26 +127,26 @@ class CardioItem extends StatelessWidget {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              AppLocalizations.of(context).delete_exercise_list_dialog_title,
+              AppLocalizations.of(context)!.delete_exercise_list_dialog_title,
             ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text(AppLocalizations.of(context)
+                  Text(AppLocalizations.of(context)!
                       .delete_exercise_list_dialog_body(cardio.name)),
                 ],
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: Text(AppLocalizations.of(context).yes),
+                child: Text(AppLocalizations.of(context)!.yes),
                 onPressed: () {
                   context.read<WorkoutModel>().deleteCardio(day, cardio);
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text(AppLocalizations.of(context).cancel),
+                child: Text(AppLocalizations.of(context)!.cancel),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

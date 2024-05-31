@@ -28,6 +28,8 @@
       }
     }
   },
+  "add_new_exercise": "New exercise",
+  "edit_exercise": "Edit exercise",
   "no_days_in_list": "There are no days,\nadd one pressing the + sign!",
   "no_exercises_in_list": "There are no exercises,\nadd one pressing the + sign!",
   "description": "Description",
