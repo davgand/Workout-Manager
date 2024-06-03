@@ -20,8 +20,6 @@ class _WorkoutManagerState extends State<WorkoutManagerApp> {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

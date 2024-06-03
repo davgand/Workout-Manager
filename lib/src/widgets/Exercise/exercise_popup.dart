@@ -233,6 +233,7 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
     if (_formKey.currentState!.validate()) {
       String description = descriptionController.text;
       int reps = int.tryParse(repsController.text) ?? AppConstants.emptyValue;
+      int rest = int.tryParse(repsController.text) ?? AppConstants.emptyValue;
       int series =
           int.tryParse(seriesController.text) ?? AppConstants.emptyValue;
       int time = int.tryParse(timeController.text) ?? AppConstants.emptyValue;
@@ -243,12 +244,14 @@ class _ExerciseDialogState extends State<ExerciseDialog> {
       if (isNew) {
         context
             .read<WorkoutModel>()
-            .addExercise(day, description, series, reps, time, weight, notes);
+            .addExercise(
+            day, description, series, reps, rest, time, weight, notes);
       } else {
         context
             .read<WorkoutModel>()
             .editExercise(
-            day, exercise!, description, series, reps, time, weight, notes);
+            day, exercise!, description,
+            series, reps, rest, time, weight, notes);
       }
       Navigator.of(context).pop();
     }

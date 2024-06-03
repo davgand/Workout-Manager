@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/workout.dart';
-import 'package:workout_manager/src/widgets/Day/day_popup.dart';
+import 'package:workout_manager/src/screens/timer_page.dart';
 import 'package:workout_manager/src/widgets/Day/days_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,36 +16,55 @@ class WorkoutScreen extends StatefulWidget {
 class _WorkoutScreenState extends State<WorkoutScreen> {
   final String title = 'Workout Manager';
   bool editing = false;
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          displayDayDialog(context);
-        },
-        shape: AppStyles.floatButtonShape,
-        child: const Icon(Icons.add),
-      ),
       appBar: AppBar(
         title: Text(title),
+        backgroundColor: Palette.lightGray,
         actions: [
           IconButton(
               onPressed: () => showHelpDialog(context), icon: Icon(Icons.help))
         ],
       ),
-      body: DaysList(
-        days: widget.workout.days,
+      bottomNavigationBar: NavigationBar(
+        backgroundColor: Palette.lightGray,
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        indicatorColor: Theme.of(context).colorScheme.primary,
+        selectedIndex: currentPageIndex,
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.home, color: Palette.white),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          NavigationDestination(
+              selectedIcon: Icon(Icons.timer_outlined, color: Palette.white),
+              icon: Icon(Icons.timer_outlined),
+              label: "Timer"),
+          // NavigationDestination(
+          //   icon: Badge(
+          //     label: Text('2'),
+          //     child: Badge(child:Icon(Icons.messenger_sharp)),
+          //   ),
+          //   label: 'Messages',
+          // ),
+        ],
       ),
+      body: [
+        DaysList(
+        days: widget.workout.days,
+        ),
+        TimerPage()
+      ][currentPageIndex],
     );
-  }
-
-  Future<void> displayDayDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return DayDialog();
-        });
   }
 
   Future<void> showHelpDialog(BuildContext context) async {

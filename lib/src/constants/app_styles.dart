@@ -57,7 +57,7 @@ class Palette {
   static const Color textColor = Color.fromARGB(255, 16, 68, 110);
   static const Color lightBlue = Color.fromARGB(255, 100, 181, 247);
   static const Color white = Color.fromARGB(250, 250, 250, 250);
-  static const Color grey = Colors.grey;
-  static const Color lightGray = Color.fromARGB(211, 221, 221, 221);
+  static const Color grey = Color.fromARGB(255, 206, 206, 206);
+  static const Color lightGray = Color.fromARGB(234, 231, 231, 231);
   static const Color red = Color(0xFFFE4A49);
 }
