@@ -77,6 +77,13 @@ class WorkoutModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void changeDayOrder(int oldIndex, int newIndex) {
+    final Day item = days.removeAt(oldIndex);
+    days.insert(newIndex, item);
+    FileHandler.writeWorkout(WorkoutModel(days));
+    notifyListeners();
+  }
+
   void addExercise(Day day, String name, int series,
       [int reps = 0,
       int rest = 0,
