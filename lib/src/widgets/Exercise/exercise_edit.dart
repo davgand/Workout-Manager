@@ -209,7 +209,7 @@ class _ExerciseEditState extends State<ExerciseEdit> {
                           ]),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(bottom: 10),
+                        padding: EdgeInsets.only(bottom: 30),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [

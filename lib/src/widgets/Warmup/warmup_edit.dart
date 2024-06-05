@@ -106,7 +106,7 @@ class _WarmupEditState extends State<WarmupEdit> {
                         Row(children: [
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                               child: DropdownButtonFormField(
                                 value: WarmupTypeHelper.toValue(type, context),
                                 items: WarmupType.values
@@ -116,7 +116,9 @@ class _WarmupEditState extends State<WarmupEdit> {
                                         WarmupTypeHelper.toValue(type, context),
                                     child: Text(
                                       WarmupTypeHelper.toValue(type, context),
-                                      style: TextStyle(fontSize: 15),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium,
                                     ),
                                   );
                                 }).toList(),
@@ -212,7 +214,7 @@ class _WarmupEditState extends State<WarmupEdit> {
                       ]),
                     ])),
                 Padding(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: EdgeInsets.only(bottom: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

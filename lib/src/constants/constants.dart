@@ -12,4 +12,7 @@ class AppConstants {
       Exercise(id: "ex1", name: "Exercise 1", series: 3, reps: 20, weight: 2000)
     ])
   ];
+
+  static const List<String> distanceUnitList = <String>["m", "Km"];
+  static const List<String> timeUnitList = <String>["s", "min"];
 }
