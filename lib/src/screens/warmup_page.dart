@@ -22,6 +22,8 @@ class WarmupPage extends StatelessWidget {
     super.key,
   });
 
+  static const routeName = '/warmups';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

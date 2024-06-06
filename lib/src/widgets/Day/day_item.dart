@@ -46,12 +46,14 @@ class DayItem extends StatelessWidget {
             ],
           ),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DayDetailsPage(day: day),
-              ),
-            );
+            Navigator.pushNamed(context, DayDetailsPage.routeName,
+                arguments: day);
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => DayDetailsPage(day: day),
+            //   ),
+            // );
           },
           minVerticalPadding: 50,
           titleAlignment: ListTileTitleAlignment.center,
@@ -72,8 +74,7 @@ class DayItem extends StatelessWidget {
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title:
-                Text(
+            title: Text(
                 AppLocalizations.of(context)!.delete_day_list_dialog_title),
             content: SingleChildScrollView(
               child: ListBody(

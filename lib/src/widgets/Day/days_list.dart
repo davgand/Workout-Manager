@@ -15,6 +15,9 @@ class DaysList extends StatelessWidget {
     required this.days,
   });
 
+  static const routeName = '/';
+
+
   @override
   Widget build(BuildContext context) {
     return Consumer<WorkoutModel>(builder: (_, workout, __) {
@@ -47,11 +50,6 @@ class DaysList extends StatelessWidget {
                         .read<WorkoutModel>()
                         .changeDayOrder(oldIndex, newIndex);
                   }
-                  // : ListView.builder(
-                  //     itemCount: days.length,
-                  //     itemBuilder: (context, index) => DayItem(
-                  //           day: days[index],
-                  //             )));
                   ));
     });
   }

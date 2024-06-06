@@ -10,16 +10,16 @@ import 'package:workout_manager/src/widgets/Exercise/exercise_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ExercisePage extends StatelessWidget {
-  final List<Exercise> exercises;
   final Day day;
   final ValueChanged<Exercise>? onTap;
 
   const ExercisePage({
     required this.day,
-    required this.exercises,
     this.onTap,
     super.key,
   });
+
+  static const routeName = '/exercises';
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class ExercisePage extends StatelessWidget {
               startPage: day.description,
               endPage: AppLocalizations.of(context)!.exercise(2)),
         ),
-        body: exercises.isEmpty
+        body: day.exercises.isEmpty
             ? Center(
                 child: Text(
                   AppLocalizations.of(context)!.no_exercises_in_list,
@@ -51,10 +51,10 @@ class ExercisePage extends StatelessWidget {
               )
             : Consumer<WorkoutModel>(builder: (_, workout, __) {
                 return ListView.builder(
-                    itemCount: exercises.length,
+                    itemCount: day.exercises.length,
                     itemBuilder: (context, index) => ExerciseItem(
                           day: day,
-                          exercise: exercises[index],
+                          exercise: day.exercises[index],
                         ));
               }));
   }

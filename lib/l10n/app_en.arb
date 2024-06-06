@@ -56,5 +56,8 @@
   "torso": "Torso",
   "leg": "Leg",
   "knee": "Knee",
-  "foot": "Foot"
+  "foot": "Foot",
+  "exercise_tooltip": "Exercise Page",
+  "warmup_tooltip": "Warmup Page",
+  "cardio_tooltip": "Cardio Page"
 }

@@ -21,6 +21,8 @@ class CardioPage extends StatelessWidget {
     super.key,
   });
 
+  static const routeName = '/cardio';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
