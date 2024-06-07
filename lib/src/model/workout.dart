@@ -84,6 +84,24 @@ class WorkoutModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void changeExerciseOrder(
+      Day day, int oldIndex, int newIndex, ExerciseEnum type) {
+    int dayIndex = days.indexOf(day);
+    switch (type) {
+      case ExerciseEnum.normal:
+        final Exercise item = days[dayIndex].exercises.removeAt(oldIndex);
+        days[dayIndex].exercises.insert(newIndex, item);
+      case ExerciseEnum.warmup:
+        final Warmup item = days[dayIndex].warmups.removeAt(oldIndex);
+        days[dayIndex].warmups.insert(newIndex, item);
+      case ExerciseEnum.cardio:
+        final Cardio item = days[dayIndex].cardio.removeAt(oldIndex);
+        days[dayIndex].cardio.insert(newIndex, item);
+    }
+    FileHandler.writeWorkout(WorkoutModel(days));
+    notifyListeners();
+  }
+
   void addExercise(Day day, String name, int series,
       [int reps = 0,
       int rest = 0,

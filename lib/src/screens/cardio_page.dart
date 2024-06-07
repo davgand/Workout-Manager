@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
+import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/day.dart';
 import 'package:workout_manager/src/model/cardio.dart';
 import 'package:workout_manager/src/model/workout.dart';
@@ -51,12 +52,20 @@ class CardioPage extends StatelessWidget {
                 ),
               )
             : Consumer<WorkoutModel>(builder: (_, workout, __) {
-                return ListView.builder(
+                return ReorderableListView.builder(
                     itemCount: cardio.length,
                     itemBuilder: (context, index) => CardioItem(
+                          key: Key('$index'),
                           day: day,
                           cardio: cardio[index],
-                        ));
+                        ),
+                    onReorder: (int oldIndex, int newIndex) {
+                      if (oldIndex < newIndex) {
+                        newIndex -= 1;
+                      }
+                      context.read<WorkoutModel>().changeExerciseOrder(
+                          day, oldIndex, newIndex, ExerciseEnum.cardio);
+                    });
               }));
   }
 }

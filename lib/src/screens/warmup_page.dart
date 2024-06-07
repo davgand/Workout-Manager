@@ -57,17 +57,27 @@ class WarmupPage extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
                       Expanded(
-                          child: ListView.builder(
+                          child: ReorderableListView.builder(
                               itemCount: warmupTypes.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) => WarmupItem(
+                                    key: Key('$index'),
                                     day: day,
                                     warmups: warmups
                                         .where((warmup) =>
                                             warmup.type == warmupTypes[index])
                                         .toList(),
                                     type: warmupTypes[index],
-                                  )))
+                                  ),
+                              onReorder: (int oldIndex, int newIndex) {
+                                if (oldIndex < newIndex) {
+                                  newIndex -= 1;
+                                }
+                                context
+                                    .read<WorkoutModel>()
+                                    .changeExerciseOrder(day, oldIndex,
+                                        newIndex, ExerciseEnum.warmup);
+                              }))
                     ]));
               }));
   }
