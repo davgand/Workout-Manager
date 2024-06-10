@@ -199,7 +199,7 @@ class WorkoutModel extends ChangeNotifier {
     days[dayIndex].warmups[index].rest = rest;
     days[dayIndex].warmups[index].type = type;
     days[dayIndex].warmups[index].series = series;
-    days[dayIndex].warmups[index].time = series;
+    days[dayIndex].warmups[index].time = time;
     days[dayIndex].warmups[index].notes = notes;
 
     FileHandler.writeWorkout(WorkoutModel(days));
