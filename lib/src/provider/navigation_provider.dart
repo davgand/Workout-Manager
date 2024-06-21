@@ -4,9 +4,9 @@ import 'package:workout_manager/src/screens/day_details_page.dart';
 import 'package:workout_manager/src/widgets/Day/days_list.dart';
 
 class Destination {
-  const Destination(this.index, this.title, this.selectedIcon, this.icon);
+  Destination(this.index, this.title, this.selectedIcon, this.icon);
   final int index;
-  final String title;
+  String title = "";
   final IconData selectedIcon;
   final IconData icon;
 }

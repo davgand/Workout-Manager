@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:workout_manager/src/constants/enums.dart';
 import 'package:workout_manager/src/model/cardio.dart';
+import 'package:workout_manager/src/model/record.dart';
 import 'package:workout_manager/src/model/exercise.dart';
 import 'package:workout_manager/src/model/warmup.dart';
 import 'package:workout_manager/src/provider/fileHandler.dart';
@@ -10,8 +11,9 @@ import 'day.dart';
 
 class WorkoutModel extends ChangeNotifier {
   List<Day> days = [];
+  List<Record> records = [];
 
-  WorkoutModel(this.days);
+  WorkoutModel(this.days, this.records);
 
   WorkoutModel.create() {
     create();
@@ -20,22 +22,31 @@ class WorkoutModel extends ChangeNotifier {
   Future<void> create() async {
     final workout = await FileHandler.readWorkout();
     days = workout.days;
+    records = workout.records;
     notifyListeners();
   }
 
   factory WorkoutModel.fromJson(Map<String, dynamic> json) {
     final daysData = json['days'] as List<dynamic>?;
+    final recordsData = json['records'] as List<dynamic>?;
     return WorkoutModel(
       daysData != null
           ? daysData
               .map((day) => Day.fromJson(day as Map<String, dynamic>))
               .toList()
           : <Day>[],
+      recordsData != null
+          ? recordsData
+              .map((record) => Record.fromJson(record as Map<String, dynamic>))
+              .toList()
+          : <Record>[],
     );
   }
 
-  Map<String, dynamic> toJson() =>
-      {'days': days.map((day) => day.toJson()).toList()};
+  Map<String, dynamic> toJson() => {
+        'days': days.map((day) => day.toJson()).toList(),
+        'records': records.map((record) => record.toJson()).toList()
+      };
 
 // Adds a workout day to the list
   void addDay({
@@ -48,7 +59,7 @@ class WorkoutModel extends ChangeNotifier {
         id: uuid.v1(), description: description, exercises: exercises ?? []);
     days.add(day);
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
 
     notifyListeners();
   }
@@ -60,7 +71,7 @@ class WorkoutModel extends ChangeNotifier {
     var dayId = days.indexOf(day);
     days[dayId].description = description;
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
 
     notifyListeners();
   }
@@ -72,7 +83,7 @@ class WorkoutModel extends ChangeNotifier {
   void deleteDay(Day dayToDelete) {
     days.removeWhere((day) => day.id == dayToDelete.id);
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
 
     notifyListeners();
   }
@@ -80,7 +91,74 @@ class WorkoutModel extends ChangeNotifier {
   void changeDayOrder(int oldIndex, int newIndex) {
     final Day item = days.removeAt(oldIndex);
     days.insert(newIndex, item);
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
+    notifyListeners();
+  }
+
+  // Adds a record for an exercise to the list
+  void addRecord({
+    required name,
+    series,
+    reps,
+    time,
+    notes,
+    DateTime? date,
+  }) {
+    var uuid = Uuid();
+
+    var record = Record(
+        id: uuid.v1(),
+        name: name,
+        series: series,
+        reps: reps,
+        time: time,
+        notes: notes,
+        date: date);
+    records.add(record);
+
+    FileHandler.writeWorkout(WorkoutModel(days, records));
+
+    notifyListeners();
+  }
+
+  void editRecord({
+    required Record record,
+    required name,
+    series,
+    reps,
+    time,
+    notes,
+    DateTime? date,
+  }) {
+    var recordId = records.indexOf(record);
+    records[recordId].name = name;
+    records[recordId].series = series;
+    records[recordId].reps = reps;
+    records[recordId].time = time;
+    records[recordId].notes = notes;
+    records[recordId].date = date;
+
+    FileHandler.writeWorkout(WorkoutModel(days, records));
+
+    notifyListeners();
+  }
+
+  Record getRecordsById(String id) {
+    return records.where((record) => record.id == id).first;
+  }
+
+  void deleteRecord(Record recordToDelete) {
+    records.removeWhere((record) => record.id == recordToDelete.id);
+
+    FileHandler.writeWorkout(WorkoutModel(days, records));
+
+    notifyListeners();
+  }
+
+  void changeRecordOrder(int oldIndex, int newIndex) {
+    final Record item = records.removeAt(oldIndex);
+    records.insert(newIndex, item);
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
@@ -98,7 +176,7 @@ class WorkoutModel extends ChangeNotifier {
         final Cardio item = days[dayIndex].cardio.removeAt(oldIndex);
         days[dayIndex].cardio.insert(newIndex, item);
     }
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
@@ -122,7 +200,7 @@ class WorkoutModel extends ChangeNotifier {
 
     days[days.indexOf(day)].exercises.add(exercise);
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
@@ -142,14 +220,14 @@ class WorkoutModel extends ChangeNotifier {
     days[dayIndex].exercises[index].weight = weight;
     days[dayIndex].exercises[index].notes = notes;
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
   void deleteExercise(Day day, Exercise exercise) {
     days[days.indexOf(day)].exercises.remove(exercise);
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
@@ -185,7 +263,7 @@ class WorkoutModel extends ChangeNotifier {
 
     days[days.indexOf(day)].warmups.add(warmup);
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
@@ -202,14 +280,14 @@ class WorkoutModel extends ChangeNotifier {
     days[dayIndex].warmups[index].time = time;
     days[dayIndex].warmups[index].notes = notes;
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
   void deleteWarmup(Day day, Warmup warmup) {
     days[days.indexOf(day)].warmups.remove(warmup);
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
@@ -232,7 +310,7 @@ class WorkoutModel extends ChangeNotifier {
 
     days[days.indexOf(day)].cardio.add(cardio);
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
@@ -251,14 +329,14 @@ class WorkoutModel extends ChangeNotifier {
     days[dayIndex].cardio[index].time = time;
     days[dayIndex].cardio[index].notes = notes;
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 
   void deleteCardio(Day day, Cardio cardio) {
     days[days.indexOf(day)].cardio.remove(cardio);
 
-    FileHandler.writeWorkout(WorkoutModel(days));
+    FileHandler.writeWorkout(WorkoutModel(days, records));
     notifyListeners();
   }
 }

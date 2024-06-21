@@ -59,5 +59,6 @@
   "foot": "Foot",
   "exercise_tooltip": "Exercise Page",
   "warmup_tooltip": "Warmup Page",
-  "cardio_tooltip": "Cardio Page"
+  "cardio_tooltip": "Cardio Page",
+  "records": "Records"
 }

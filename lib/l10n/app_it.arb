@@ -59,5 +59,6 @@
   "foot": "Piedi",
   "exercise_tooltip": "Pagina degli esercizi",
   "warmup_tooltip": "Pagina del riscaldamento",
-  "cardio_tooltip": "Pagina del cardio"
+  "cardio_tooltip": "Pagina del cardio",
+  "records": "Massimali"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/workout.dart';
 import 'package:workout_manager/src/provider/navigation_provider.dart';
+import 'package:workout_manager/src/screens/record_page.dart';
 import 'package:workout_manager/src/screens/timer_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -19,9 +20,11 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
   int currentPageIndex = 0;
   late final List<GlobalKey<NavigatorState>> navigatorKeys;
 
-  static const List<Destination> allDestinations = <Destination>[
-    Destination(0, "Home", Icons.home_outlined, Icons.home),
-    Destination(1, "Timer", Icons.timer_outlined, Icons.timer_outlined)
+  List<Destination> allDestinations = <Destination>[
+    Destination(0, "Workout", Icons.sports_gymnastics_rounded,
+        Icons.sports_gymnastics_rounded),
+    Destination(1, "Timer", Icons.timer_outlined, Icons.timer_outlined),
+    Destination(2, "Records", Icons.emoji_events, Icons.emoji_events_outlined)
   ];
 
   @override
@@ -35,6 +38,11 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    allDestinations[0].title = AppLocalizations.of(context)!.workout(1);
+    allDestinations[1].title = "Timer";
+    allDestinations[2].title = AppLocalizations.of(context)!.records;
+
+
     return NavigatorPopHandler(
         onPop: () {
           final NavigatorState navigator =
@@ -51,7 +59,8 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
                   DayNavigator(
                       navigatorKey: navigatorKeys[0],
                       days: widget.workout.days),
-                  TimerPage()
+                  TimerPage(),
+                  RecordPage(records: widget.workout.records)
                 ][index];
                 if (index == currentPageIndex) {
                   return Offstage(offstage: false, child: view);
@@ -87,26 +96,15 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
             indicatorColor: Theme.of(context).colorScheme.primary,
             selectedIndex: currentPageIndex,
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            destinations: <Widget>[
-              NavigationDestination(
-                selectedIcon:
-                    Icon(Icons.sports_gymnastics_rounded, color: Palette.white),
-                icon: Icon(Icons.sports_gymnastics_rounded),
-                label: AppLocalizations.of(context)!.workout(1),
-              ),
-              NavigationDestination(
-                  selectedIcon:
-                      Icon(Icons.timer_outlined, color: Palette.white),
-                  icon: Icon(Icons.timer_outlined),
-                  label: "Timer"),
-              // NavigationDestination(
-              //   icon: Badge(
-              //     label: Text('2'),
-              //     child: Badge(child: Icon(Icons.messenger_sharp)),
-              //   ),
-              //   label: 'Messages',
-              // ),
-            ],
+            destinations: allDestinations.map(
+              (Destination destination) {
+                return NavigationDestination(
+                    selectedIcon:
+                        Icon(destination.selectedIcon, color: Palette.white),
+                    icon: Icon(destination.icon),
+                    label: destination.title);
+              },
+            ).toList(),
           ),
         ));
   }
