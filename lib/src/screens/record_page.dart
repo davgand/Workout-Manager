@@ -4,22 +4,30 @@ import 'package:provider/provider.dart';
 import 'package:workout_manager/src/constants/app_styles.dart';
 import 'package:workout_manager/src/model/record.dart';
 import 'package:workout_manager/src/model/workout.dart';
+import 'package:workout_manager/src/widgets/Record/record_edit.dart';
 import 'package:workout_manager/src/widgets/Record/record_item.dart';
 
 class RecordPage extends StatelessWidget {
   final List<Record> records;
 
   const RecordPage({
-    super.key,
     required this.records,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WorkoutModel>(builder: (_, workout, __) {
       return Scaffold(
           floatingActionButton: FloatingActionButton(
-            onPressed: () {},
+          heroTag: UniqueKey(),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RecordEdit(),
+              ),
+            );
+          },
             shape: AppStyles.floatButtonShape,
             child: const Icon(Icons.add),
           ),
@@ -30,7 +38,8 @@ class RecordPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 )
-              : ReorderableListView.builder(
+            : Consumer<WorkoutModel>(builder: (_, workout, __) {
+                return ReorderableListView.builder(
                   itemCount: records.length,
                   itemBuilder: (context, index) => RecordItem(
                         key: Key('$index'),
@@ -42,8 +51,8 @@ class RecordPage extends StatelessWidget {
                     }
                     context
                         .read<WorkoutModel>()
-                        .changeDayOrder(oldIndex, newIndex);
-                  }));
-    });
+                          .changeRecordOrder(oldIndex, newIndex);
+                    });
+              }));
   }
 }

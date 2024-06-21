@@ -101,6 +101,7 @@ class WorkoutModel extends ChangeNotifier {
     series,
     reps,
     time,
+    weight,
     notes,
     DateTime? date,
   }) {
@@ -112,6 +113,7 @@ class WorkoutModel extends ChangeNotifier {
         series: series,
         reps: reps,
         time: time,
+        weight: weight,
         notes: notes,
         date: date);
     records.add(record);
@@ -127,6 +129,7 @@ class WorkoutModel extends ChangeNotifier {
     series,
     reps,
     time,
+    weight,
     notes,
     DateTime? date,
   }) {
@@ -135,6 +138,7 @@ class WorkoutModel extends ChangeNotifier {
     records[recordId].series = series;
     records[recordId].reps = reps;
     records[recordId].time = time;
+    records[recordId].weight = weight;
     records[recordId].notes = notes;
     records[recordId].date = date;
 

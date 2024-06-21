@@ -39,6 +39,7 @@
   "time": "Tempo",
   "weight": "Peso (Kg)",
   "notes": "Note",
+  "date": "Data",
   "distance": "Distanza",
   "enter_value_message": "Inserire un valore",
   "day": "{count, plural, one{Giorno} other{Giorni}}",

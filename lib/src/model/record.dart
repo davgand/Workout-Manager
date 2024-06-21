@@ -10,6 +10,7 @@ class Record extends Exercise {
     super.series = AppConstants.emptyValue,
     super.reps = AppConstants.emptyValue,
     super.time = AppConstants.emptyValue,
+    super.weight = AppConstants.emptyValue,
     super.notes = AppConstants.emptyValueString,
     DateTime? date,
   }) : date = date ?? DateTime.now();
@@ -21,6 +22,7 @@ class Record extends Exercise {
         series: json['series'],
         reps: json['reps'],
         time: json['time'],
+        weight: json['weight'],
         notes: json['notes'],
       );
 
@@ -33,6 +35,7 @@ class Record extends Exercise {
       'series': series,
       'reps': reps,
       'time': time,
+      'weight': weight,
       'notes': notes,
     };
   }

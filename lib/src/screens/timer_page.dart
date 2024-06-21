@@ -117,6 +117,7 @@ class TimerPageState extends State<TimerPage> {
                   buildButton(Icons.restart_alt_rounded, Palette.blue,
                       resetButtonPressed, false),
                 FloatingActionButton.large(
+                  heroTag: UniqueKey(),
                   shape: CircleBorder(),
                   backgroundColor: Palette.blue,
                   onPressed: playPausePressed,

@@ -6,6 +6,7 @@ class AppConstants {
 
   static const emptyValue = 0;
   static const emptyValueString = "";
+  static const dateFormat = "dd-MM-yyyy";
 
   static List<Day> dummyDays = [
     Day.create(id: "day1", description: "Day 1", exercises: [
