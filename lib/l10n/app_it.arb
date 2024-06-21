@@ -7,7 +7,7 @@
   "help_dialog_title": "Aiuto",
   "help_dialog_body": "Scorri a destra su un elemento per visualizzare le diverse opzioni. \n\nTieni premuto su un oggetto e trascina per riordinare.",
   "help_dialog_info": "Workout Manager è un progetto open source.",
-  "help_dialog_credits": "Sviluppato con ❤️\nda Davide Gandolfi.",
+  "help_dialog_credits": "Sviluppato con ❤️ da Davide Gandolfi.",
   "delete_exercise_list_dialog_title": "Elimina Esercizio",
   "delete_exercise_list_dialog_body": "Vuoi davvero eliminare l'esercizio {list_name}? \n\nQuesta azione non può essere annullata.",
   "@delete_exercise_list_dialog_body": {

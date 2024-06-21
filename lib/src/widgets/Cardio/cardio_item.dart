@@ -63,15 +63,15 @@ class CardioItem extends StatelessWidget {
                           if (cardio.reps != AppConstants.emptyValue &&
                               cardio.series != AppConstants.emptyValue)
                             Text(
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyLarge,
                                 "${cardio.series} x ${cardio.reps}")
                           else if (cardio.reps != AppConstants.emptyValue)
                             Text(
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyLarge,
                                 "${cardio.reps}")
                           else if (cardio.series != AppConstants.emptyValue)
                             Text(
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyLarge,
                                 "${cardio.series}"),
                         ])),
                 if (cardio.distance != AppConstants.emptyValue)
@@ -81,7 +81,7 @@ class CardioItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyLarge,
                                 "${cardio.distance} km"),
                           ])),
                 if (cardio.time != AppConstants.emptyValue)
@@ -91,7 +91,7 @@ class CardioItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyLarge,
                                 "${cardio.time} min"),
                           ])),
               ],

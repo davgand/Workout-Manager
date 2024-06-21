@@ -63,11 +63,11 @@ class ExerciseItem extends StatelessWidget {
                           children: [
                             if (exercise.reps == AppConstants.emptyValue)
                               Text(
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                   "${exercise.series}")
                             else
                               Text(
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                   "${exercise.series} x ${exercise.reps}"),
                           ])),
                   if (exercise.weight != AppConstants.emptyValue)
@@ -77,7 +77,7 @@ class ExerciseItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                   "${exercise.weight} kg"),
                             ])),
                   if (exercise.rest != AppConstants.emptyValue)
@@ -87,7 +87,7 @@ class ExerciseItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                   "${exercise.rest} s"),
                             ])),
                   if (exercise.time != AppConstants.emptyValue)
@@ -97,7 +97,7 @@ class ExerciseItem extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                   "${exercise.time} s"),
                             ])),
                 ],

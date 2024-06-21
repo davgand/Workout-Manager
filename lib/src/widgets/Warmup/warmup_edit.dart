@@ -118,7 +118,7 @@ class _WarmupEditState extends State<WarmupEdit> {
                                       WarmupTypeHelper.toValue(type, context),
                                       style: Theme.of(context)
                                           .textTheme
-                                          .bodyMedium,
+                                          .bodyLarge,
                                     ),
                                   );
                                 }).toList(),

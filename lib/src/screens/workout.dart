@@ -124,10 +124,13 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
               Text(AppLocalizations.of(context)!.help_dialog_info),
               Text("\n"),
               Text("\n"),
-              Text(
+              FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
                 AppLocalizations.of(context)!.help_dialog_credits,
                 style: Theme.of(context).textTheme.bodySmall,
-              ),
+                ),
+              )
             ])),
             actions: <Widget>[
               TextButton(

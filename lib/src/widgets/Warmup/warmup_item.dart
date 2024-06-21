@@ -97,7 +97,7 @@ class WarmupItem extends StatelessWidget {
                                         Text(
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .bodyMedium,
+                                                .bodyLarge,
                                             "${warmups[index].rest} s"),
                                       ])),
                           if (warmups[index].time != AppConstants.emptyValue)

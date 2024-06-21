@@ -23,8 +23,10 @@ class AppStyles {
       ),
       displaySmall: GoogleFonts.roboto(),
       headlineMedium: GoogleFonts.roboto(),
-      titleMedium: GoogleFonts.roboto(fontWeight: FontWeight.bold),
-      bodyMedium: GoogleFonts.roboto(),
+        titleMedium:
+            GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20),
+        bodyMedium: GoogleFonts.roboto(),
+        bodyLarge: GoogleFonts.roboto()
     ),
   );
 
