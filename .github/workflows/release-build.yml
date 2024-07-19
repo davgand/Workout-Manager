@@ -23,7 +23,7 @@ jobs:
             java-version: 20
         # Step 4 - Setup Gradle to allow workflow access and execute Gradlew file
         -  name: Make gradlew executable
-           run: chmod +x ./gradlew
+           run: chmod +x ./android/gradlew
         # Step 5 - Setup Gradle Cache to improve the speed of the workflows
         -  name: Setup Gradle Cache
            uses: gradle/gradle-build-action@v2
@@ -38,13 +38,13 @@ jobs:
             versionName: 1.0.0
         # Step 7 - Build Production App Bundle
         -  name: Build prodRelease
-           run: ./gradlew bundleRelease
+           run: ./android/gradlew bundleRelease
         # Step 8 - Sign AAB
         -  name: Sign AAb
            id: sign
            uses: r0adkll/sign-android-release@v1
            with:
-            releaseDirectory: app/build/outputs/bundle/release
+            releaseDirectory: android/app/build/outputs/bundle/release
             signingKeyBase64: ${{ secrets.KEYSTORE }}
             alias: ${{ secrets.ALIAS }}
             keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -54,7 +54,7 @@ jobs:
            uses: actions/upload-artifact@v2
            with:
              name: app-bundle
-             path: app/build/outputs/bundle/release/app-release.aab
+             path: android/app/build/outputs/bundle/release/app-release.aab
         # Step 10 - Print out the Job Status
         -  run: echo Build status report=${{ job.status }}
 
