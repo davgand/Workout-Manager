@@ -33,18 +33,18 @@ jobs:
         -  name: Bump Version Code
            uses: chkfung/android-version-actions@v1.2.1
            with:
-            gradlePath: android/app/build.gradle.kts
+            gradlePath: app/build.gradle
             versionCode: ${{ github.run_number }}
             versionName: 1.0.0
         # Step 7 - Build Production App Bundle
         -  name: Build prodRelease
-           run: ./android/gradlew bundleRelease
+           run: ./gradlew bundleRelease
         # Step 8 - Sign AAB
         -  name: Sign AAb
            id: sign
            uses: r0adkll/sign-android-release@v1
            with:
-            releaseDirectory: android/app/build/outputs/bundle/release
+            releaseDirectory: app/build/outputs/bundle/release
             signingKeyBase64: ${{ secrets.KEYSTORE }}
             alias: ${{ secrets.ALIAS }}
             keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
@@ -54,7 +54,7 @@ jobs:
            uses: actions/upload-artifact@v2
            with:
              name: app-bundle
-             path: android/app/build/outputs/bundle/release/app-release.aab
+             path: app/build/outputs/bundle/release/app-release.aab
         # Step 10 - Print out the Job Status
         -  run: echo Build status report=${{ job.status }}
 
