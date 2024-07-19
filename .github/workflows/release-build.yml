@@ -23,7 +23,7 @@ jobs:
             java-version: 20
         # Step 4 - Setup Gradle to allow workflow access and execute Gradlew file
         -  name: Make gradlew executable
-           run: chmod +x ./android/gradlew
+           run: chmod +x ./gradlew
         # Step 5 - Setup Gradle Cache to improve the speed of the workflows
         -  name: Setup Gradle Cache
            uses: gradle/gradle-build-action@v2
