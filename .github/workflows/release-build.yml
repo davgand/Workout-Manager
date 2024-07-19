@@ -13,8 +13,8 @@ jobs:
         -  uses: actions/checkout@v3
         # Step 2 [Optional] - retrieves the contents of API_KEY_PROPERTIES secret from GitHub Secrets
         # and save it as apikey.properties file in the workflow workspace.
-        -  name: Get apikey.properties from secrets
-           run: echo "${{ secrets.API_KEY_PROPERTIES }}" > $GITHUB_WORKSPACE/apikey.properties
+      #   -  name: Get apikey.properties from secrets
+      #      run: echo "${{ secrets.API_KEY_PROPERTIES }}" > $GITHUB_WORKSPACE/apikey.properties
         # Step 3 - Setup Java
         -  name: Setup JDK 20
            uses: actions/setup-java@v3
@@ -33,7 +33,7 @@ jobs:
         -  name: Bump Version Code
            uses: chkfung/android-version-actions@v1.2.1
            with:
-            gradlePath: app/build.gradle.kts
+            gradlePath: android/app/build.gradle.kts
             versionCode: ${{ github.run_number }}
             versionName: 1.0.0
         # Step 7 - Build Production App Bundle
