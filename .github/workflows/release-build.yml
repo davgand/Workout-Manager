@@ -29,13 +29,13 @@ jobs:
            uses: gradle/gradle-build-action@v2
            with:
             gradle-home-cache-cleanup: true
-        # Step 6 - Override the version code and version name
-        -  name: Bump Version Code
-           uses: chkfung/android-version-actions@v1.2.2
-           with:
-            gradlePath: app/build.gradle
-            versionCode: ${{ github.run_number }}
-            versionName: 1.0.0
+      #   # Step 6 - Override the version code and version name
+      #   -  name: Bump Version Code
+      #      uses: chkfung/android-version-actions@v1.2.2
+      #      with:
+      #       gradlePath: app/build.gradle
+      #       versionCode: ${{ github.run_number }}
+      #       versionName: 1.0.0
         # Step 7 - Build Production App Bundle
         -  name: Build prodRelease
            run: ./gradlew bundleRelease
